@@ -1,13 +1,16 @@
 #include "../includes/minishell.h"
 
-int main(void) 
-{
+int main() {
     char *input;
-
-    input = readline("Introduce una cadena: ");
+    
+    // Leer la entrada del usuario
+    input = readline("Ingrese un comando: ");
+    
+    // Agregar la entrada al historial
     add_history(input);
-    printf("Entrada del usuario: %s\n", input);
-    free(input);
-
+    
+    // Verificar el número de entradas en el historial
+    printf("Se han guardado %d entradas en el historial.\n", history_length);
+    
     return 0;
 }

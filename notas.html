@@ -16,45 +16,55 @@
 		<tr>
 			<td class="nombre">readline</td>
 			<td class="descrip">La función readline() en C se utiliza para leer una línea de entrada de un usuario desde la 
-				consola. Esta función es muy útil para leer líneas de entrada de usuario de longitud desconocida.</td>
+				consola. Esta función es muy útil para leer líneas de entrada de usuario de longitud desconocida. Hay que incluir en el make
+				-ireadline o no linkea el main</td>
 			<td class="prototipo">char *readline(const char *prompt);</td>
 			<td class="libreria">readline.h</td>
 		</tr>
 		<tr>
-			<td class="nombre"></td>
-			<td class="descrip"></td>
-			<td class="prototipo"></td>
-			<td class="libreria"></td>
+			<td class="nombre">rl_clear_history</td>
+			<td class="descrip">es una función de la biblioteca readline en C que se
+				 utiliza para borrar todo el historial de comandos almacenado en la memoria por la biblioteca readline.</td>
+			<td class="prototipo">rl_clear_history();</td>
+			<td class="libreria">readline/history.h</td>
 		</tr>
 		<tr>
-			<td class="nombre"></td>
-			<td class="descrip"></td>
-			<td class="prototipo"></td>
-			<td class="libreria"></td>
+			<td class="nombre">rl_on_new_line</td>
+			<td class="descrip"> es una función de la biblioteca readline en C que se utiliza para indicarle a la biblioteca readline 
+				que se ha escrito una nueva línea en la terminal. Esta función es útil para controlar 
+				el comportamiento de la biblioteca readline después de que se escribe una nueva línea en la terminal.</td>
+			<td class="prototipo">rl_on_new_line();</td>
+			<td class="libreria">readline/history.h</td>
 		</tr>
 		<tr>
-			<td class="nombre"></td>
-			<td class="descrip"></td>
-			<td class="prototipo"></td>
-			<td class="libreria"></td>
+			<td class="nombre">rl_replace_line</td>
+			<td class="descrip">??????????</td>
+			<td class="prototipo">?????????</td>
+			<td class="libreria">??????????</td>
 		</tr>
 		<tr>
-			<td class="nombre"></td>
-			<td class="descrip"></td>
-			<td class="prototipo"></td>
-			<td class="libreria"></td>
+			<td class="nombre">rl_redisplay</td>
+			<td class="descrip">Esta función no toma ningún argumento y no devuelve ningún valor. Su único propósito
+				 es actualizar la pantalla y volver a mostrar la línea de entrada actual. Para utilizar esta función, 
+				se debe incluir la biblioteca "readline/readline.h" en el archivo fuente de C.</td>
+			<td class="prototipo">void rl_redisplay(void);</td>
+			<td class="libreria">readline/readline.h</td>
 		</tr>
 		<tr>
-			<td class="nombre"></td>
-			<td class="descrip"></td>
-			<td class="prototipo"></td>
-			<td class="libreria"></td>
+			<td class="nombre">add_history</td>
+			<td class="descrip">La función "add_history" agrega una nueva entrada de comando a un historial de entradas previas. 
+				Esto significa que cuando el usuario utiliza las teclas de flecha arriba/abajo para navegar por el historial de comandos, las entradas de comando anteriores se mostrarán, 
+				lo que hace que sea más fácil para el usuario repetir comandos antiguos.</td>
+			<td class="prototipo">void add_history(const char *line);</td>
+			<td class="libreria">readline/history.h</td>
 		</tr>
 		<tr>
-			<td class="nombre"></td>
-			<td class="descrip"></td>
-			<td class="prototipo"></td>
-			<td class="libreria"></td>
+			<td class="nombre">access</td>
+			<td class="descrip">La función "access" en C se utiliza para comprobar si el proceso tiene acceso a un archivo específico. 
+				Esta función comprueba si el usuario actual tiene los permisos necesarios para realizar una operación
+				 en un archivo determinado, como leer o escribir en el archivo</td>
+			<td class="prototipo">int access(const char *pathname, int mode);</td>
+			<td class="libreria">unistd.h</td>
 		</tr>
 		<tr>
 			<td class="nombre"></td>
