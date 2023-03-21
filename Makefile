@@ -1,9 +1,22 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jlimones <jlimones@student.42malaga.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/12/09 09:17:57 by jlimones          #+#    #+#              #
+#    Updated: 2023/03/21 18:53:28 by jlimones         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = minishell
+LIBFT = libft/libft.a -lreadline
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
 SRC = 	src/main.c \
 
-AUTHOR = jlimones/abarriga
+AUTHOR = jlimones / abarriga
 DATE = 21/03/2023
 
 COM_COLOR   = \033[0;34m
@@ -38,20 +51,20 @@ endif
 	@printf "%b" "$(OBJ_COLOR)Flags: 	$(WARN_COLOR)$(FLAGS)\n\033[m"
 
 $(NAME): $(SRC) $(OBJ)
-	@gcc -o $(NAME) $(FLAGS) $(SRC)
+	@make -C libft
+	@gcc -o $(NAME) $(FLAGS) $(SRC) $(LIB) $(LIBFT)
 	@printf "%b" "$(OK_COLOR)" "minishell compilado\n"
-
-%.o: %.c $(HEAD)
-	@gcc $(FLAGS) -c $< -o $@
 
 skiperror:
 	@$(CC) -o $(NAME) $(SRC)
 
 clean: header
+	@make clean -C libft
 	@rm -f $(OBJ)
 
 fclean: header clean
 	@rm -f $(NAME)
+	@make fclean -C libft
 	@printf "%b" "$(OK_COLOR)" "fclean ejecutado correctamente\n"
 	
 

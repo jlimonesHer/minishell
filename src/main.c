@@ -1,6 +1,13 @@
-#include <stdio.h>
+#include "../includes/minishell.h"
 
-int main()
+int main(void) 
 {
-	printf("Hello world");
+    char *input;
+
+    input = readline("Introduce una cadena: ");
+    add_history(input);
+    printf("Entrada del usuario: %s\n", input);
+    free(input);
+
+    return 0;
 }
