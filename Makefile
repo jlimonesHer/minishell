@@ -1,21 +1,10 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/09 09:17:57 by jlimones          #+#    #+#              #
-#    Updated: 2023/03/22 17:27:57 by jlimones         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = minishell
 LIBFT = libft/libft.a -lreadline
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
 SRC = 	src/main.c \
 	 	src/utils.c \
+		src/lexer.c \
 
 AUTHOR = jlimones / abarriga
 DATE = 21/03/2023

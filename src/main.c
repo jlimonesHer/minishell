@@ -6,9 +6,17 @@ int main()
     while (1)
     {
         char *input;
-        input = readline(">");
+        char **a;
+        int     i;
+
+        i = 0;
+        input = readline("> ");
+        a = lexer(input);
         add_history(input);
-        printf("%s\n", input);
-        ft_exit(input);
+        while (a && a[i])
+        {
+            printf("%s\n", a[i]);
+            i++;
+        }
     }
 }
