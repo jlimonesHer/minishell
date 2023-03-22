@@ -16,4 +16,8 @@ typedef struct s_command {
 	char	**argv;
 }			t_comand;
 
+
+/*lexer.c*/
+int		check_input_quotes(char *input);
+char	**lexer(char *input);
 #endif
