@@ -16,4 +16,13 @@ typedef struct s_command {
 	char	**argv;
 }			t_comand;
 
+typedef struct s_cmd_table
+{
+
+}	t_cmd_table;
+
+/* utils.c */
+void	ft_exit(char *cmd);
+
+
 #endif

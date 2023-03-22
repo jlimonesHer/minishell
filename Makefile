@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jlimones <jlimones@student.42malaga.com    +#+  +:+       +#+         #
+#    By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 09:17:57 by jlimones          #+#    #+#              #
-#    Updated: 2023/03/21 18:53:28 by jlimones         ###   ########.fr        #
+#    Updated: 2023/03/22 17:27:57 by jlimones         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ LIBFT = libft/libft.a -lreadline
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
 SRC = 	src/main.c \
+	 	src/utils.c \
 
 AUTHOR = jlimones / abarriga
 DATE = 21/03/2023
