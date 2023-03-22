@@ -67,9 +67,89 @@
 			<td class="libreria">unistd.h</td>
 		</tr>
 		<tr>
-			<td class="nombre"></td>
-			<td class="descrip"></td>
-			<td class="prototipo"></td>
+			<td class="nombre">wait</td>
+			<td class="descrip">La función wait() espera a que el proceso hijo termine su ejecución y luego devuelve el identificador del proceso hijo
+				status es un puntero a una variable que se utiliza para almacenar el estado de salida del proceso hijo.</td>
+			<td class="prototipo">pid_t wait(int *status);</td>
+			<td class="libreria">unistd.h</td>
+		</tr>
+		<tr>
+			<td class="nombre">waitpid</td>
+			<td class="descrip">función waitpid() para esperar a un proceso hijo específico en lugar de esperar al primero que termine.
+				pid es el identificador del proceso hijo que se desea esperar. Si se especifica -1, waitpid() esperará a cualquier proceso hijo.
+				status es un puntero a una variable que se utiliza para almacenar el estado de salida del proceso hijo.
+				options es un entero que especifica varias opciones que se pueden utilizar con waitpid(), 
+				como WNOHANG, que indica que waitpid() debe regresar inmediatamente en lugar de esperar a que el proceso hijo termine.
+			</td>
+			<td class="prototipo">pid_t waitpid(pid_t pid, int *status, int options);</td>
+			<td class="libreria">unistd.h</td>
+		</tr>
+		<tr>
+			<td class="nombre">wait3</td>
+			<td class="descrip">versiones mejoradas de la función wait(), y proporcionan información adicional sobre el proceso hijo que ha finalizado.
+				status es un puntero a una variable que se utiliza para almacenar el estado de salida del proceso hijo.
+				options es un entero que especifica varias opciones que se pueden utilizar con wait3(), como WNOHANG, que indica que wait3() debe regresar inmediatamente en lugar de esperar a que el proceso hijo termine.
+				rusage es un puntero a una estructura rusage que se utiliza para almacenar información sobre los recursos utilizados por el proceso hijo.
+			</td>
+			<td class="prototipo">pid_t wait3(int *status, int options, struct rusage *rusage);</td>
+			<td class="libreria">sys/wait.h</td>
+		</tr>
+		<tr>
+			<td class="nombre">wait4</td>
+			<td class="descrip">acepta un argumento adicional que se utiliza para especificar una señal que debería interrumpir la espera de procesos secundarios</td>
+			<td class="prototipo">pid_t wait4(pid_t pid, int *status, int options, struct rusage *rusage);</td>
+			<td class="libreria">sys/wait.h</td>
+		</tr>
+		<tr>
+			<td class="nombre">signal</td>
+			<td class="descrip">En C, la función signal() se utiliza para manipular señales en el sistema operativo UNIX. Las señales son una forma de comunicación entre procesos y entre procesos y el kernel, y se utilizan para notificar a un proceso de eventos importantes, como errores de hardware, eventos de temporización o solicitudes de interrupción.
+				signum es el número de la señal a manejar. Las señales tienen números asociados que se utilizan para identificarlas, como SIGINT (2) para la señal de interrupción del teclado.
+				handler es un puntero a una función que se llama cuando se recibe la señal especificada.
+			</td>
+			<td class="prototipo">void (*signal(int signum, void (*handler)(int)))(int);</td>
+			<td class="libreria">signal.h</td>
+		</tr>
+		<tr>
+			<td class="nombre">sigaction</td>
+			<td class="descrip">se utiliza para cambiar el comportamiento de una señal en el sistema operativo UNIX. La función sigaction() es una alternativa más flexible a la función signal(), y se utiliza para establecer un manejador de señal y definir las opciones de la señal para un proceso específico.
+				signum es el número de la señal a manejar. Las señales tienen números asociados que se utilizan para identificarlas, como SIGINT (2) para la señal de interrupción del teclado.
+				act es un puntero a una estructura sigaction que especifica el nuevo manejador de señal y las opciones de la señal.
+				oldact es un puntero opcional a una estructura sigaction que se utiliza para almacenar la información del manejador de señal anterior. mirar struck!!!
+			</td>
+			<td class="prototipo">int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);</td>
+			<td class="libreria">signal.h</td>
+		</tr>
+		<tr>
+			<td class="nombre">kill</td>
+			<td class="descrip"> se utiliza para enviar una señal a un proceso específico en el sistema operativo UNIX. La señal especificada puede ser cualquier señal definida en el sistema operativo, como SIGTERM para solicitar que un proceso se cierre o SIGKILL para forzar su cierre inmediato.
+				pid es el identificador del proceso al que se enviará la señal. Si pid es mayor que 0, se envía la señal al proceso con ese ID. Si pid es igual a 0, la señal se envía a todos los procesos en el grupo de procesos actual. Si pid es igual a -1, la señal se envía a todos los procesos a los que el proceso actual tiene permiso para enviar señales.
+				sig es el número de la señal a enviar, como SIGTERM o SIGKILL.
+			</td>
+			<td class="prototipo">int kill(pid_t pid, int sig);</td>
+			<td class="libreria">sin libreria</td>
+		</tr>
+		<tr>
+			<td class="nombre">getcwd</td>
+			<td class="descrip">en C (abreviatura de "get current working directory") se utiliza para obtener el directorio actual de trabajo del proceso en el que se está ejecutando el programa.
+				buf es un puntero a un búfer que se utiliza para almacenar la ruta del directorio actual.
+				size es el tamaño máximo del búfer en bytes.
+			</td>
+			<td class="prototipo">char *getcwd(char *buf, size_t size);</td>
+			<td class="libreria">unistd.h/limits.h</td>
+		</tr>
+		<tr>
+			<td class="nombre">chdir</td>
+			<td class="descrip">se utiliza para cambiar el directorio de trabajo actual del proceso en el que se está ejecutando el programa.</td>
+			<td class="prototipo">int chdir(const char *path);</td>
+			<td class="libreria">unistd.h</td>
+		</tr>
+		<tr>
+			<td class="nombre">stat</td>
+			<td class="descrip">se utiliza para obtener información sobre un archivo en particular. La información que se puede obtener mediante esta función incluye detalles sobre el tamaño del archivo, su fecha de creación, su fecha de modificación y permisos de acceso, entre otros.
+				path es una cadena de caracteres que representa la ruta del archivo que se desea obtener información.
+				buf es un puntero a una estructura stat en la que se almacenará la información obtenida por la función. mirar struck!!!
+			</td>
+			<td class="prototipo">int stat(const char *path, struct stat *buf);</td>
 			<td class="libreria"></td>
 		</tr>
 		<tr>
@@ -90,46 +170,6 @@
 			<td class="prototipo"></td>
 			<td class="libreria"></td>
 		</tr>
-		<tr>
-			<td class="nombre"></td>
-			<td class="descrip"></td>
-			<td class="prototipo"></td>
-			<td class="libreria"></td>
-		</tr>
-		<tr>
-			<td class="nombre"></td>
-			<td class="descrip"></td>
-			<td class="prototipo"></td>
-			<td class="libreria"></td>
-		</tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		<tr>
 			<td class="nombre"></td>
 			<td class="descrip"></td>
@@ -137,5 +177,24 @@
 			<td class="libreria"></td>
 		</tr>
 	</table>
+	<h2>Struck de stat</h2>
+	<p>
+		struct stat { <br>
+			dev_t     st_dev;         /* ID del dispositivo que contiene el archivo */<br>
+			ino_t     st_ino;         /* Número de inodo del archivo */<br>
+			mode_t    st_mode;        /* Permisos del archivo */<br>
+			nlink_t   st_nlink;       /* Número de enlaces duros */<br>
+			uid_t     st_uid;         /* ID del propietario del archivo */<br>
+			gid_t     st_gid;         /* ID del grupo del archivo */<br>
+			dev_t     st_rdev;        /* Tipo de dispositivo (si el archivo es un dispositivo) */<br>
+			off_t     st_size;        /* Tamaño en bytes del archivo */<br>
+			blksize_t st_blksize;     /* Tamaño del bloque de E/S óptimo para el archivo */<br>
+			blkcnt_t  st_blocks;      /* Número de bloques asignados al archivo */<br>
+			time_t    st_atime;       /* Último acceso al archivo */<br>
+			time_t    st_mtime;       /* Última modificación del archivo */<br>
+			time_t    st_ctime;       /* Último cambio de estado del archivo */<br>
+		};<br>
+		---------------------------------------------------------------------
+	</p>
 </body>
 </html>
