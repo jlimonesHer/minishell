@@ -176,6 +176,60 @@
 			<td class="prototipo"></td>
 			<td class="libreria"></td>
 		</tr>
+		<tr>
+            <td class="nombre">perror</td>
+            <td class="descrip">se utiliza para imprimir un mensaje de error en la salida estándar que describe el último error que ocurrió en el programa.</td>
+            <td class="prototipo">void perror(const char *s);</td>
+            <td class="libreria">errno.h</td>
+        </tr>
+        <tr>
+            <td class="nombre">isatty</td>
+            <td class="descrip">Se utiliza para determinar si un descriptor de archivo (como STDIN_FILENO, STDOUT_FILENO o STDERR_FILENO) se refiere a un terminal interactivo.</td>
+            <td class="prototipo">int isatty(int fd);</td>
+            <td class="libreria">unistd.h</td>
+        </tr>
+        <tr>
+            <td class="nombre">ttyname</td>
+            <td class="descrip">Se utiliza para determinar el nombre del dispositivo de entrada/salida de terminal asociado al descriptor de archivo dado.</td>
+            <td class="prototipo">char *ttyname(int fd);</td>
+            <td class="libreria">unistd.h</td>
+        </tr>
+        <tr>
+            <td class="nombre">ttyslot</td>
+            <td class="descrip">Se utiliza para determinar el número de entrada/salida de terminal asociado al proceso actual.</td>
+            <td class="prototipo">int ttyslot(void);</td>
+            <td class="libreria">unistd.h</td>
+        </tr>
+        <tr>
+            <td class="nombre">ioctl</td>
+            <td class="descrip">Se utiliza para controlar dispositivos de entrada/salida a través de comandos específicos enviados al controlador del dispositivo.</td>
+            <td class="prototipo">int ioctl(int fd, unsigned long request, ...);</td>
+            <td class="libreria">unistd.h</td>
+        </tr>
+        <tr>
+            <td class="nombre">getenv</td>
+            <td class="descrip">Se utiliza para obtener el valor de una variable de entorno en el sistema operativo.</td>
+            <td class="prototipo">char *getenv(const char *nombre);</td>
+            <td class="libreria">stdlib.h</td>
+        </tr>
+        <tr>
+            <td class="nombre">tcsetattr</td>
+            <td class="descrip">Se utiliza para establecer los atributos del terminal en un descriptor de archivo dado. Los atributos del terminal incluyen cosas como la velocidad de transmisión, el tamaño del carácter y los modos de control de flujo, entre otros.</td>
+            <td class="prototipo">int tcsetattr(int fd, int optional_actions, const struct termios *termios_p);</td>
+            <td class="libreria">termios.h</td>
+        </tr>
+        <tr>
+            <td class="nombre">tcgetattr</td>
+            <td class="descrip">Se utiliza para obtener los atributos del terminal en un descriptor de archivo dado. Los atributos del terminal incluyen cosas como la velocidad de transmisión, el tamaño del carácter y los modos de control de flujo, entre otros.</td>
+            <td class="prototipo">int tcgetattr(int fd, struct termios *termios_p);</td>
+            <td class="libreria">termios.h</td>
+        </tr>
+        <tr>
+            <td class="nombre">tgetent</td>
+            <td class="descrip">Su función es leer y analizar las entradas del archivo de base de datos de terminal, y cargar los valores correspondientes en la estructura de datos de terminal term, que se utiliza para controlar la apariencia y el comportamiento de la pantalla.</td>
+            <td class="prototipo">int tgetent(char *bp, const char *name);</td>
+            <td class="libreria">curses.h</td>
+        </tr>
 	</table>
 </body>
 </html>
