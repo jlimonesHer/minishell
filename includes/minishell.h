@@ -21,6 +21,14 @@ typedef struct s_cmd_table
 
 }	t_cmd_table;
 
+// typedef struct s_quote
+// {
+// 	int	quotes;
+// 	int	quote;
+// 	int	flag_quotes;
+// 	int	flag_quote;
+// 	int	i;
+// }	t_quote;
 /* utils.c */
 void	ft_exit(char *cmd);
 
@@ -29,4 +37,5 @@ void	ft_exit(char *cmd);
 /*lexer.c*/
 int		check_input_quotes(char *input);
 char	**lexer(char *input);
+int		ft_issame(char c, char *str);
 #endif

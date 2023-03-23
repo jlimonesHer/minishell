@@ -7,55 +7,74 @@
  * @param input 
  * @return int 
  */
+// int	check_input_quotes(char *input)
+// {
+// 	t_quote	q;
+
+// 	while (input[q.i])
+// 	{
+// 		if (input[q.i] == '\"')
+// 		{
+// 			if (q.flag_quote == 1)
+// 				return (1);
+// 			q.quotes += 1;
+// 			if (q.flag_quotes == 0)
+// 				q.flag_quotes = 1;
+// 			else if (q.flag_quotes == 1)
+// 				q.flag_quotes = 0;
+// 		}
+// 		if (q.input[q.i] == '\'')
+// 		{
+// 			if (q.flag_quotes == 1)
+// 				return (1);
+// 			q.quote += 1;
+// 			if (q.flag_quote == 0)
+// 				q.flag_quote = 1;
+// 			else if (flag_quote == 1)
+// 				q.flag_quote = 0;
+// 		}
+// 		q.i += 1;
+// 	}
+// 	if (q.quotes % 2 == 0 && q.quote % 2 == 0)
+// 		return (0);
+// 	else
+// 		return (1);
+// }
+
 int	check_input_quotes(char *input)
 {
-	int	quotes;
-	int	quote;
-	int	flag_quotes;
-	int	flag_quote;
-	int	i;
+	char	quote;
 
-	i = 0;
-	quotes = 0;
-	quote = 0;
-	flag_quotes = 0;
-	flag_quote = 0;
-	while (input[i])
+	quote = '\0';
+	while (*input)
 	{
-		if (input[i] == '\"')
-		{
-			if (flag_quote == 1)
-				return (1);
-			quotes += 1;
-			if (flag_quotes == 0)
-				flag_quotes = 1;
-			else if (flag_quotes == 1)
-				flag_quotes = 0;
-		}
-		if (input[i] == '\'')
-		{
-			if (flag_quotes == 1)
-				return (1);
-			quote += 1;
-			if (flag_quote == 0)
-				flag_quote = 1;
-			else if (flag_quote == 1)
-				flag_quote = 0;
-		}
-		i++;
+		if (*input == quote)
+			quote = '\0';
+		else if (ft_issame(*input, "\"\'") && quote == '\0')
+			quote = *input;
+		input++;
 	}
-	if (quotes % 2 == 0 && quote % 2 == 0)
-		return (0);
-	else
+	if (quote != '\0')
 		return (1);
+	return (0);
+
 }
 
+// void	init_quote(t_quote q)
+// {
+// 	q.i = 0;
+// 	q.quotes = 0;
+// 	q.quote = 0;
+// 	q.flag_quotes = 0;
+// 	q.flag_quote = 0;
+// }
 /**
  * @brief Función que hace un split a la entrada
  * 
  * @param input 
  * @return char** 
  */
+
 char	**lexer(char *input)
 {
 	char	**split_input;
@@ -69,4 +88,23 @@ char	**lexer(char *input)
 	if (!split_input)
 		return (NULL);
 	return (split_input);
+}
+
+/**
+ * @brief Esta función te devuelve okey si encuentra el caracter en una cadena que le mandas a buscar
+ * 
+ * @param c 
+ * @param str 
+ * @return int 
+ */
+
+int	ft_issame(char c, char *str)
+{
+	while (*str)
+	{
+		if (*str == c)
+			return (1);
+		str++;
+	}
+	return (0);
 }
