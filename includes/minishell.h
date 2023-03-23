@@ -3,6 +3,7 @@
 # include "../libft/libft.h"
 # include <dirent.h>
 # include <errno.h>
+# include <unistd.h>
 # include <stdio.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -18,7 +19,7 @@ typedef struct s_command {
 
 typedef struct s_cmd_table
 {
-
+	char	*argv;
 }	t_cmd_table;
 
 /* utils.c */
