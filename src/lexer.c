@@ -11,17 +11,37 @@ int	check_input_quotes(char *input)
 {
 	int	quotes;
 	int	quote;
+	int	flag_quotes;
+	int	flag_quote;
 	int	i;
 
 	i = 0;
 	quotes = 0;
 	quote = 0;
+	flag_quotes = 0;
+	flag_quote = 0;
 	while (input[i])
 	{
 		if (input[i] == '\"')
+		{
+			if (flag_quote == 1)
+				return (1);
 			quotes += 1;
+			if (flag_quotes == 0)
+				flag_quotes = 1;
+			else if (flag_quotes == 1)
+				flag_quotes = 0;
+		}
 		if (input[i] == '\'')
+		{
+			if (flag_quotes == 1)
+				return (1);
 			quote += 1;
+			if (flag_quote == 0)
+				flag_quote = 1;
+			else if (flag_quote == 1)
+				flag_quote = 0;
+		}
 		i++;
 	}
 	if (quotes % 2 == 0 && quote % 2 == 0)
