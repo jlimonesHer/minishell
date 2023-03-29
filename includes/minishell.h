@@ -25,7 +25,9 @@ typedef struct s_cmd_table
 /* utils.c */
 void	ft_exit(char *cmd);
 
-
+/*path_cmd.c*/
+char	*search_path(char **envp, char *cmd);
+void	ft_one_cmd(t_comand *args, char **env);
 
 /*lexer.c*/
 int		check_input_quotes(char *input);
