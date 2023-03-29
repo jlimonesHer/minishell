@@ -15,11 +15,14 @@
 typedef struct s_command {
 	int		argc;
 	char	**argv;
-}			t_comand;
+}			t_command;
 
 typedef struct s_cmd_table
 {
-	char	*argv;
+	int			n_cmds;
+	t_command	*cmds;
+	char		*infile;
+	char		*outfile;
 }	t_cmd_table;
 
 /* utils.c */
@@ -27,7 +30,7 @@ void	ft_exit(char *cmd);
 
 /*path_cmd.c*/
 char	*search_path(char **envp, char *cmd);
-void	ft_one_cmd(t_comand *args, char **env);
+void	ft_one_cmd(t_cmd_table *cmds, char **env);
 
 /*lexer.c*/
 int		check_input_quotes(char *input);

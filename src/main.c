@@ -1,13 +1,25 @@
 #include "../includes/minishell.h"
 #include <sys/stat.h>
 
-static t_comand init_struct(char *input, int argc)
+static t_cmd_table	init_struct(char *input, int argc)
 {
-	t_comand cmd;
+	t_cmd_table	cmds;
+	char		**commands;
+	int			i;
 
-	cmd.argv = ft_split(input, ' ');
-	cmd.argc = argc;
-	return (cmd);
+	commands = ft_split(input, '|');
+	// TODO contar antes de reservar memoria
+	cmds.cmds = malloc(50 * sizeof(t_command));
+	i = 0;
+	while (commands[i])
+	{
+		cmds.cmds[i].argv = ft_split(commands[i], ' ');
+		cmds.cmds[i].argc = argc;
+		i++;
+	}
+	cmds.n_cmds = i;
+	free(commands);
+	return (cmds);
 }
 
 int main(int ac, char **av, char **env)
@@ -15,7 +27,7 @@ int main(int ac, char **av, char **env)
 	char		*input;
 	char		**a;
 	int			i;
-	t_comand	args;
+	t_cmd_table	cmds;
 
 	if (ac == 1 && av[0][0])
 	{
@@ -24,15 +36,14 @@ int main(int ac, char **av, char **env)
 			i = 0;
 			input = readline("jlimones> ");
 			a = lexer(input);
-			printf("input = %s\n", input);
 			add_history(input);
-			args = init_struct(input, ac);
-			while (args.argv[i])
-			{
-				printf("argv[%i] = %s\n", i, args.argv[i]);
-				i++;
-			}
-			ft_one_cmd(&args, env);
+			cmds = init_struct(input, ac);
+			// while (cmds.cmds[i].argv[0])
+			// {
+			// 	printf("argv[%i] = %s\n", i, cmds.cmds[i].argv[i]);
+			// 	i++;
+			// }
+			ft_one_cmd(&cmds, env);
 			// while (a && a[i])
 			// {
 			// 	printf("%s\n", a[i]);
