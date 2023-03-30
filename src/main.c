@@ -38,6 +38,7 @@ int main(int ac, char **av, char **env)
 			a = lexer(input);
 			add_history(input);
 			cmds = init_struct(input, ac);
+			
 			// while (cmds.cmds[i].argv[0])
 			// {
 			// 	printf("argv[%i] = %s\n", i, cmds.cmds[i].argv[i]);

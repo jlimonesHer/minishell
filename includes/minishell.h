@@ -25,12 +25,25 @@ typedef struct s_cmd_table
 	char		*outfile;
 }	t_cmd_table;
 
+typedef struct s_fd_pipes
+{
+	int		fdin;
+	int		fdout;
+	int		tmpin;
+	int		tmpout;
+}	t_fd_pipes;
+
 /* utils.c */
 void	ft_exit(char *cmd);
 
 /*path_cmd.c*/
 char	*search_path(char **envp, char *cmd);
 void	ft_one_cmd(t_cmd_table *cmds, char **env);
+
+/*builtin.c*/
+void	ft_pwd(void);
+//void	ft_echo(char *argv);
+int		exec_builtin(char **argv);
 
 /*lexer.c*/
 int		check_input_quotes(char *input);
