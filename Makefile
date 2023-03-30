@@ -5,6 +5,7 @@ FLAGS = -Wall -Werror -Wextra
 SRC = 	src/main.c \
 	 	src/utils.c \
 		src/lexer.c \
+		src/split_shell.c \
 
 AUTHOR = jlimones / abarriga
 DATE = 21/03/2023

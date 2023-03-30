@@ -9,45 +9,20 @@
  */
 int	check_input_quotes(char *input)
 {
-	int	quotes;
-	int	quote;
-	int	flag_quotes;
-	int	flag_quote;
-	int	i;
+	char	quote;
 
-	i = 0;
-	quotes = 0;
-	quote = 0;
-	flag_quotes = 0;
-	flag_quote = 0;
-	while (input[i])
+	quote = '\0';
+	while (*input)
 	{
-		if (input[i] == '\"')
-		{
-			if (flag_quote == 1)
-				return (1);
-			quotes += 1;
-			if (flag_quotes == 0)
-				flag_quotes = 1;
-			else if (flag_quotes == 1)
-				flag_quotes = 0;
-		}
-		if (input[i] == '\'')
-		{
-			if (flag_quotes == 1)
-				return (1);
-			quote += 1;
-			if (flag_quote == 0)
-				flag_quote = 1;
-			else if (flag_quote == 1)
-				flag_quote = 0;
-		}
-		i++;
+		if (*input == quote)
+			quote = '\0';
+		else if (ft_issame(*input, "\"\'") && quote == '\0')
+			quote = *input;
+		input++;
 	}
-	if (quotes % 2 == 0 && quote % 2 == 0)
-		return (0);
-	else
+	if (quote != '\0')
 		return (1);
+	return (0);
 }
 
 /**
@@ -65,8 +40,30 @@ char	**lexer(char *input)
 		printf("ERROR");
 		return (NULL);
 	}
-	split_input = ft_split(input, ' ');
-	if (!split_input)
-		return (NULL);
+	// split_input = ft_split(input, ' ');
+	// if (!split_input)
+	// 	return (NULL);
+	// return (split_input);
+	split_input = split_shell(input);
 	return (split_input);
+}
+
+/**
+ * @brief Esta función te devuelve okey si encuentra el caracter en una cadena 
+ * que le mandas a buscar
+ * 
+ * @param c 
+ * @param str 
+ * @return int 
+ */
+
+int	ft_issame(char c, char *str)
+{
+	while (*str)
+	{
+		if (*str == c)
+			return (1);
+		str++;
+	}
+	return (0);
 }
