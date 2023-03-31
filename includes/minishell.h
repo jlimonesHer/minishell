@@ -14,7 +14,7 @@
 typedef struct s_command {
 	int		argc;
 	char	**argv;
-}			t_comand;
+}			t_command;
 
 typedef struct s_cmd_table
 {

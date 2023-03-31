@@ -6,16 +6,16 @@ int main()
     while (1)
     {
         char *input;
-        char **a;
+        t_command a;
         int     i;
 
         i = 0;
         input = readline("> ");
-        a = lexer(input);
+        a.argv = lexer(input);
         add_history(input);
-        while (a && a[i])
+        while (a.argv && a.argv[i])
         {
-            printf("%s\n", a[i]);
+            printf("%s\n", a.argv[i]);
             i++;
         }
     }
