@@ -41,11 +41,18 @@ static	void	ft_cd(char **argv)
 	char	*path;
 
 	getcwd(buffer, 256);
-	//search_path("PWD", )
+	if (!argv[1])
+	{
+		chdir(getenv("HOME"));
+		return ;
+	}
 	path = ft_strjoin(buffer, "/");
 	path = ft_strjoin(path, argv[1]);
 	if (chdir(argv[1]) < 0)
-		perror("Error");
+	{
+		ft_putstr_fd(("cd: no such file or directory: "), 2);
+		ft_putstr_fd(ft_strjoin(argv[1], "\n"), 2);
+	}
 }
 
 int	exec_builtin(char **argv)
