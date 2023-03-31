@@ -34,7 +34,7 @@ int main(int ac, char **av, char **env)
 		while (1)
 		{
 			i = 0;
-			input = readline("jlimones> ");
+			input = readline("> ");
 			a = lexer(input);
 			add_history(input);
 			cmds = init_struct(input, ac);

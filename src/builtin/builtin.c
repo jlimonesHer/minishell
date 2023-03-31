@@ -11,11 +11,41 @@ void	ft_pwd(void)
 void	ft_echo(char **argv)
 {
 	int		i;
+	int		j;
+	int		new_line;
 
+	new_line = 1;
 	i = -1;
-	while (argv[1][++i])
-		printf("%c", argv[1][i]);
-	printf("\n");
+	j = 0;
+	if (!ft_strncmp(argv[1], "-n", 2))
+	{
+		new_line = 0;
+		j++;
+	}
+	while (argv[++j])
+	{
+		while (argv[j][++i])
+		{
+			printf("%c", argv[j][i]);
+		}
+		printf(" ");
+		i = -1;
+	}
+	if (new_line)
+		printf("\n");
+}
+
+static	void	ft_cd(char **argv)
+{
+	char	buffer[256];
+	char	*path;
+
+	getcwd(buffer, 256);
+	//search_path("PWD", )
+	path = ft_strjoin(buffer, "/");
+	path = ft_strjoin(path, argv[1]);
+	if (chdir(argv[1]) < 0)
+		perror("Error");
 }
 
 int	exec_builtin(char **argv)
@@ -28,7 +58,7 @@ int	exec_builtin(char **argv)
 	else if (!ft_strncmp(argv[0], "echo", 5))
 		ft_echo(argv);
 	else if (!ft_strncmp(argv[0], "cd", 3))
-		printf("cd\n");
+		ft_cd(argv);
 	else if (!ft_strncmp(argv[0], "export", 7))
 		printf("export\n");
 	else if (!ft_strncmp(argv[0], "unset", 6))
