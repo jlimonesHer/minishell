@@ -57,8 +57,6 @@ int	check_input_quotes(char *input)
 	if (quote != '\0')
 		return (1);
 	return (0);
-
-	return (0);
 }
 
 // void	init_quote(t_quote q)

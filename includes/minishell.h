@@ -38,7 +38,6 @@ void	ft_exit(char *cmd);
 int		check_input_quotes(char *input);
 char	**lexer(char *input);
 int		ft_issame(char c, char *str);
-int		ft_issame(char c, char *str);
 
 /*split_shell.c*/
 
