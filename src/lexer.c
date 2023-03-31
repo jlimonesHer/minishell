@@ -58,6 +58,7 @@ int	check_input_quotes(char *input)
 		return (1);
 	return (0);
 
+	return (0);
 }
 
 // void	init_quote(t_quote q)
@@ -84,14 +85,17 @@ char	**lexer(char *input)
 		printf("ERROR");
 		return (NULL);
 	}
-	split_input = ft_split(input, ' ');
-	if (!split_input)
-		return (NULL);
+	// split_input = ft_split(input, ' ');
+	// if (!split_input)
+	// 	return (NULL);
+	// return (split_input);
+	split_input = split_shell(input);
 	return (split_input);
 }
 
 /**
- * @brief Esta función te devuelve okey si encuentra el caracter en una cadena que le mandas a buscar
+ * @brief Esta función te devuelve okey si encuentra el caracter en una cadena 
+ * que le mandas a buscar
  * 
  * @param c 
  * @param str 

@@ -14,7 +14,7 @@
 typedef struct s_command {
 	int		argc;
 	char	**argv;
-}			t_comand;
+}			t_command;
 
 typedef struct s_cmd_table
 {
@@ -38,4 +38,23 @@ void	ft_exit(char *cmd);
 int		check_input_quotes(char *input);
 char	**lexer(char *input);
 int		ft_issame(char c, char *str);
+int		ft_issame(char c, char *str);
+
+/*split_shell.c*/
+
+int			count_quote_word(char *s, char quote);
+int			check_doubleredir(char *s);
+int			check_word(char *s);
+int			count_words(char *s);
+int			fill_cmd(char *input, int num_words, char **strs);
+int			check_redir(char **strs);
+char		**split_shell(char *input);
+char		**ft_freewords(int words, char **tab);
+
+
+
+
+
+/*lexer_utils.c*/
+
 #endif
