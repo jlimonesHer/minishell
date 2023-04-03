@@ -11,18 +11,19 @@
 # include <sys/ioctl.h>
 # include <sys/wait.h>
 
+// typedef struct s_command {
+// 	int		n_cmds;
+// 	char	**split_input;
+// }			t_command;
+
 typedef struct s_command {
-	int		argc;
-	char	**argv;
-}			t_command;
-
-typedef struct s_cmd_table {
-
-	int			n_cmds;
-	t_command	*cmds;
+	char		**argv;
 	char		*infile;
+	int			double_ins;
 	char		*outfile;
-}				t_cmd_table;
+	int			double_out;
+	int			last;
+}				t_command;
 
 /* utils.c */
 void	ft_exit(char *cmd);
@@ -45,10 +46,12 @@ int			check_redir(char **strs);
 char		**split_shell(char *input);
 char		**ft_freewords(int words, char **tab);
 
-
-
-
-
 /*lexer_utils.c*/
+
+/*parser.c*/
+int		count_cmds(char **split_input);
+void	last_cmd_table(t_command *b, int n_cmds);
+void	fill_cmds(t_command *b, char **split_input);
+
 
 #endif

@@ -6,6 +6,7 @@ SRC = 	src/main.c \
 	 	src/utils.c \
 		src/lexer.c \
 		src/split_shell.c \
+		src/parser.c \
 
 AUTHOR = jlimones / abarriga
 DATE = 21/03/2023
