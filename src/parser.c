@@ -19,26 +19,52 @@ t_command	*parser(char *input)
 
 void	fill_cmds(t_command *b, char **split_input)
 {
-	int	cmd;
-	int	pos;
-	int	j;
-	int	i;
+	// int	cmd;
+	// int	pos;
+	// int	j;
+	// int	i;
+	// int	redir;
+	t_fill	var;
 
-	cmd = 0;
-	i = 0;
-	while (split_input[i])
+	var.cmd = 0;
+	var.i = 0;
+	while (split_input[var.i])
 	{
-		pos = i;
-		while (split_input[i] && !ft_issame(split_input[i][0], "|<>"))
-			i++;
-		b[cmd].argv = ft_calloc(sizeof(char *), i + 1);
-		j = 0;
-		while (pos < i)
-			b[cmd].argv[j++] = ft_strdup(split_input[pos++]);
-		cmd++;
-		if (split_input[i] && ft_issame(split_input[i][0], "|"))
-			i++;
+		var.pos = var.i;
+		var.redir = 0;
+		while (split_input[var.i] && !ft_issame(split_input[var.i][0], "|"))
+		{
+			if (ft_issame(split_input[var.i][0], "<>"))
+				var.redir = var.i;
+			var.i++;
+		}
+		create_cmds(b, split_input, var);
+		// b[cmd].argv = ft_calloc(sizeof(char *), i + 1);
+		// j = 0;
+		// while (pos < i)
+		// 	b[cmd].argv[j++] = ft_strdup(split_input[pos++]);
+		// cmd++;
+		// if (split_input[i] && ft_issame(split_input[i][0], "|"))
+		// 	i++;
 	}
+}
+
+void	create_cmds(t_command *b, char	**split_input, t_fill var)
+{
+	int	a;
+
+	a = 0;
+	if (var.redir == 0)
+		a = var.i;
+	else
+		a = var.redir;
+	b[var.cmd].argv = ft_calloc(sizeof(char *), a + 1);
+	var.j = 0;
+	while (var.pos < var.i)
+		b[var.cmd].argv[var.j++] = ft_strdup(split_input[var.pos++]);
+	var.cmd++;
+	if (split_input[var.i] && ft_issame(split_input[var.i][0], "|"))
+		var.i++;
 }
 
 int	count_cmds(char **split_input)

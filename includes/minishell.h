@@ -25,6 +25,14 @@ typedef struct s_command {
 	int			last;
 }				t_command;
 
+typedef struct s_fill {
+	int	cmd;
+	int	pos;
+	int	j;
+	int	i;
+	int	redir;
+}				t_fill;
+
 /* utils.c */
 void	ft_exit(char *cmd);
 
@@ -52,6 +60,6 @@ char		**ft_freewords(int words, char **tab);
 int		count_cmds(char **split_input);
 void	last_cmd_table(t_command *b, int n_cmds);
 void	fill_cmds(t_command *b, char **split_input);
-
+void	create_cmds(t_command *b, char	**split_input, t_fill var);
 
 #endif
