@@ -40,10 +40,6 @@ char	**lexer(char *input)
 		printf("ERROR");
 		return (NULL);
 	}
-	// split_input = ft_split(input, ' ');
-	// if (!split_input)
-	// 	return (NULL);
-	// return (split_input);
 	split_input = split_shell(input);
 	return (split_input);
 }
