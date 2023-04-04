@@ -31,14 +31,20 @@ void	fill_cmds(t_command *b, char **split_input)
 	while (split_input[var.i])
 	{
 		var.pos = var.i;
-		var.redir = 0;
+		var.redir_in = 0;
+		var.redir_out = 0;
 		while (split_input[var.i] && !ft_issame(split_input[var.i][0], "|"))
 		{
-			if (ft_issame(split_input[var.i][0], "<>"))
-				var.redir = var.i;
+			if (ft_issame(split_input[var.i][0], "<"))
+				var.redir_in = var.i;
+			if (ft_issame(split_input[var.i][0], ">"))
+				var.redir_out = var.i;
 			var.i++;
 		}
-		create_cmds(b, split_input, var);
+		create_cmds(b, split_input, &var);
+		// take_fd();
+		// expand_quotes();
+
 		// b[cmd].argv = ft_calloc(sizeof(char *), i + 1);
 		// j = 0;
 		// while (pos < i)
@@ -49,22 +55,27 @@ void	fill_cmds(t_command *b, char **split_input)
 	}
 }
 
-void	create_cmds(t_command *b, char	**split_input, t_fill var)
+void	create_cmds(t_command *b, char	**split_input, t_fill *var)
 {
 	int	a;
 
 	a = 0;
-	if (var.redir == 0)
-		a = var.i;
+	if (var->redir_in != 0)
+	{
+		
+	}
+	if (var->redir == 0)
+		a = var->i;
 	else
-		a = var.redir;
-	b[var.cmd].argv = ft_calloc(sizeof(char *), a + 1);
-	var.j = 0;
-	while (var.pos < var.i)
-		b[var.cmd].argv[var.j++] = ft_strdup(split_input[var.pos++]);
-	var.cmd++;
-	if (split_input[var.i] && ft_issame(split_input[var.i][0], "|"))
-		var.i++;
+		a = var->redir;
+	printf("este es la pos de la redir: %d\n", var->redir);
+	b[var->cmd].argv = ft_calloc(sizeof(char *), a + 1);
+	var->j = 0;
+	while (var->pos < a)
+		b[var->cmd].argv[var->j++] = ft_strdup(split_input[var->pos++]);
+	var->cmd++;
+	if (split_input[var->i] && ft_issame(split_input[var->i][0], "|"))
+		var->i++;
 }
 
 int	count_cmds(char **split_input)

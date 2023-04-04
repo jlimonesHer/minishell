@@ -30,7 +30,8 @@ typedef struct s_fill {
 	int	pos;
 	int	j;
 	int	i;
-	int	redir;
+	int	redir_in;
+	int	redir_out;
 }				t_fill;
 
 /* utils.c */
@@ -60,6 +61,6 @@ char		**ft_freewords(int words, char **tab);
 int		count_cmds(char **split_input);
 void	last_cmd_table(t_command *b, int n_cmds);
 void	fill_cmds(t_command *b, char **split_input);
-void	create_cmds(t_command *b, char	**split_input, t_fill var);
+void	create_cmds(t_command *b, char	**split_input, t_fill *var);
 
 #endif
