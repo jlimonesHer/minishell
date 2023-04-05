@@ -85,7 +85,8 @@ int check_redir(char **strs)
 {
 	if (!strs[0])
 		return (0);
-	if (ft_issame(strs[0][0], "<>|"))
+	// if (ft_issame(strs[0][0], "<>|")) INTENTO DE CORREGIR PROBLEMA PARA METER ENTRADAS DE ARCHIVOS
+	if (ft_issame(strs[0][0], ">|"))
 		return (1);
 	strs++;
 	while (*strs)

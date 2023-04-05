@@ -31,7 +31,7 @@ typedef struct s_fill {
 	int	j;
 	int	i;
 	int	redir_in;
-	int	redir_out;
+	int	redir;
 }				t_fill;
 
 /* utils.c */
