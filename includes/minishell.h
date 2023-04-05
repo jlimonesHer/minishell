@@ -30,8 +30,10 @@ typedef struct s_fill {
 	int	pos;
 	int	j;
 	int	i;
+	int	a;
+	int	final;
 	int	redir_in;
-	int	redir;
+	int	redir_out;
 }				t_fill;
 
 /* utils.c */
