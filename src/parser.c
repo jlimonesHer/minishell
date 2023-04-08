@@ -19,11 +19,6 @@ t_command	*parser(char *input)
 
 void	fill_cmds(t_command *b, char **split_input)
 {
-	// int	cmd;
-	// int	pos;
-	// int	j;
-	// int	i;
-	// int	redir;
 	t_fill	var;
 
 	var.cmd = 0;
