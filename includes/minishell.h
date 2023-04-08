@@ -19,8 +19,10 @@
 typedef struct s_command {
 	char		**argv;
 	char		*infile;
+	int			fd_in;
 	int			double_ins;
 	char		*outfile;
+	int			fd_out;
 	int			double_out;
 	int			last;
 }				t_command;
@@ -37,32 +39,30 @@ typedef struct s_fill {
 }				t_fill;
 
 /* utils.c */
-void	ft_exit(char *cmd);
-
-
+void		ft_exit(char *cmd);
 
 /*lexer.c*/
-int		check_input_quotes(char *input);
-char	**lexer(char *input);
-int		ft_issame(char c, char *str);
+int			check_input_quotes(char *input);
+char		**lexer(char *input);
+int			ft_issame(char c, char *str);
 
 /*split_shell.c*/
-
-int			count_quote_word(char *s, char quote);
-int			check_doubleredir(char *s);
 int			check_word(char *s);
 int			count_words(char *s);
 int			fill_cmd(char *input, int num_words, char **strs);
 int			check_redir(char **strs);
 char		**split_shell(char *input);
-char		**ft_freewords(int words, char **tab);
 
 /*lexer_utils.c*/
+int			count_quote_word(char *s, char quote);
+int			check_doubleredir(char *s);
+char		**ft_freewords(int words, char **tab);
 
 /*parser.c*/
-int		count_cmds(char **split_input);
-void	last_cmd_table(t_command *b, int n_cmds);
-void	fill_cmds(t_command *b, char **split_input);
-void	create_cmds(t_command *b, char	**split_input, t_fill *var);
-
+t_command	*parser(char *input);
+int			count_cmds(char **split_input);
+void		last_cmd_table(t_command *b, int n_cmds);
+void		fill_cmds(t_command *b, char **split_input);
+void		create_cmds(t_command *b, char	**split_input, t_fill *var);
+void		take_fd(t_command *b);
 #endif

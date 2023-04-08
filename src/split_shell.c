@@ -1,23 +1,5 @@
 #include "../includes/minishell.h"
 
-int	count_quote_word(char *s, char quote)
-{
-	int	pos;
-
-	pos = 1;
-	while (s[pos] != quote && s[pos])
-		pos++;
-	return (pos);
-}
-
-int	check_doubleredir(char *s)
-{
-	if (*s == '>' || *s == '<')
-		if (s[0] == s[1])
-			return (2);
-	return (1);
-}
-
 int	check_word(char *s)
 {
 	int	pos;
@@ -109,20 +91,7 @@ char	**split_shell(char *input)
 	if (!strs || fill_cmd(input, num_words, strs))
 		return (perror("Error"), NULL);
 	if (check_redir(strs))
-		return (ft_freewords(num_words, strs),ft_putendl_fd("Error:Parsing have a error.", 2) , NULL);
+		return (ft_freewords(num_words, strs),
+			ft_putendl_fd("Error:Parsing have a error.", 2), NULL);
 	return (strs);
-}
-
-char	**ft_freewords(int words, char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (i < words)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	return (NULL);
 }
