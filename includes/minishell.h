@@ -65,4 +65,5 @@ void		last_cmd_table(t_command *b, int n_cmds);
 void		fill_cmds(t_command *b, char **split_input);
 void		create_cmds(t_command *b, char	**split_input, t_fill *var);
 void		take_fd(t_command *b);
+void	expand_quotes(t_command *b);
 #endif

@@ -43,7 +43,43 @@ void	fill_cmds(t_command *b, char **split_input)
 		create_cmds(b, split_input, &var);
 	}
 	take_fd(b);
-	// expand_quotes();
+	expand_quotes(b);
+}
+
+void	expand_quotes(t_command *b)
+{
+	int		i;
+	int		j;
+	int		begin;
+	char	*var;
+
+	i = 0;
+	while (b->last != 1)
+	{
+		// printf("Esta la variale de entorno:%c\n", b->argv[1][0]);
+		while (b->argv[i])
+		{
+			j = 0;
+			if (b->argv[i][0] == '\"')
+			{
+				while (b->argv[i][j])
+				{
+					if (b->argv[i][j] == '$')
+					{
+						begin = j;
+						while (!ft_issame(b->argv[i][j], " \""))
+							j++;
+						var = ft_calloc(j - begin + 1, sizeof(char));
+						ft_strlcpy(var, &b->argv[i][begin + 1], j - begin);
+						printf("Esta la variale de entorno:%s\n", var);
+					}
+					j++;
+				}
+			}
+			i++;
+		}
+		b++;
+	}
 }
 
 void	take_fd(t_command *b)
