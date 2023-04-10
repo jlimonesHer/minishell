@@ -75,7 +75,10 @@ t_command	*parser(char *input);
 int			count_cmds(char **split_input);
 void		last_cmd_table(t_command *b, int n_cmds);
 void		fill_cmds(t_command *b, char **split_input);
-void		create_cmds(t_command *b, char	**split_input, t_fill *var);
+void		create_cmd(t_command *b, char	**split_input, t_fill *var);
+void		count_redir(char	**split_input, t_fill *var, t_command *b);
+void		create_infile(t_command *b, char **split_input, t_fill *var);
+void		create_outfile(t_command *b, char **split_input, t_fill *var);
 void		take_fd(t_command *b);
-void	expand_quotes(t_command *b);
+void		expand_quotes(t_command *b);
 #endif
