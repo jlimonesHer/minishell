@@ -18,12 +18,12 @@
 
 typedef struct s_command {
 	char		**argv;
-	char		*infile;
+	char		**infile;
 	int			fd_in;
-	int			double_ins;
-	char		*outfile;
+	// int			double_ins;
+	char		**outfile;
 	int			fd_out;
-	int			double_out;
+	int			*double_out;
 	int			last;
 }				t_command;
 
@@ -35,8 +35,20 @@ typedef struct s_fill {
 	int	a;
 	int	final;
 	int	redir_in;
+	int	c_in;
 	int	redir_out;
+	int	c_out;
+	int	num_r_in;
+	int	num_r_out;
+
 }				t_fill;
+
+typedef struct s_expand {
+	int		i;
+	int		j;
+	int		bg;
+	char	*var;
+}				t_expand;
 
 /* utils.c */
 void		ft_exit(char *cmd);
