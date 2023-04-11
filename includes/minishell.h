@@ -20,7 +20,6 @@ typedef struct s_command {
 	char		**argv;
 	char		**infile;
 	int			fd_in;
-	// int			double_ins;
 	char		**outfile;
 	int			fd_out;
 	int			*double_out;
