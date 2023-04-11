@@ -57,15 +57,13 @@ static int	ft_create_child(t_command *cmds, char **env, int i)
 	pid = fork();
 	if (pid == 0)
 	{
-		shell = search_path(env, cmds->argv[0]);
-		printf("shell = %s\n", shell);
+		shell = search_path(env, *cmds[i].argv);
 		if (shell == NULL)
 		{
-			ft_putstr_fd(cmds->argv[i], 2);
 			ft_putstr_fd(": command no found\n", 2);
 			exit(-1);
 		}
-		execve(shell, &cmds->argv[i], env);
+		execve(shell, &cmds[i].argv[0], env);
 		perror("Error: ");
 		exit(-1);
 	}
@@ -100,6 +98,8 @@ void	ft_one_cmd(t_command *cmds, char **env)
 		dup2(t_pipe->fdout, 1);
 		close(t_pipe->fdout);
 		pid = ft_create_child(cmds, env, i);
+		printf("%i\n", i);
+		printf("%i\n", cmds->n_cmds);
 		if (i == cmds->n_cmds - 1)
 			waitpid(pid, &status, 0);
 	}
