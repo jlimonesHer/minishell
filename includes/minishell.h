@@ -43,7 +43,7 @@ void	ft_one_cmd(t_cmd_table *cmds, char **env);
 /*builtin.c*/
 void	ft_pwd(void);
 //void	ft_echo(char *argv);
-int		exec_builtin(char **argv);
+int		exec_builtin(char **argv, char **env);
 
 /*lexer.c*/
 int		check_input_quotes(char *input);

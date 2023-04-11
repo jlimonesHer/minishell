@@ -52,7 +52,7 @@ static int	ft_create_child(t_cmd_table *cmds, char **env, int i)
 	int		pid;
 	char	*shell;
 
-	if (exec_builtin(cmds->cmds[i].argv))
+	if (exec_builtin(cmds->cmds[i].argv, env))
 		return (-1);
 	pid = fork();
 	if (pid == 0)
