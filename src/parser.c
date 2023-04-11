@@ -45,7 +45,7 @@ void	fill_cmds(t_command *b, char **split_input)
 		}
 	}
 	take_fd(b);
-	// expand_quotes(b);
+	expand_quotes(b);
 }
 
 void	create_cmd(t_command *b, char	**split_input, t_fill *var)
