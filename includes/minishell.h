@@ -11,11 +11,6 @@
 # include <sys/ioctl.h>
 # include <sys/wait.h>
 
-// typedef struct s_command {
-// 	int		n_cmds;
-// 	char	**split_input;
-// }			t_command;
-
 typedef struct s_command {
 	char		**argv;
 	char		**infile;
@@ -39,18 +34,7 @@ typedef struct s_fill {
 	int	c_out;
 	int	num_r_in;
 	int	num_r_out;
-
-// typedef struct s_quote
-// {
-// 	int	quotes;
-// 	int	quote;
-// 	int	flag_quotes;
-// 	int	flag_quote;
-// 	int	i;
-// }	t_quote;
-/* utils.c */
-void	ft_exit(char *cmd);
-}				t_fill;
+}			t_fill;
 
 typedef struct s_expand {
 	int		i;
