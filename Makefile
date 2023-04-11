@@ -6,6 +6,11 @@ SRC = 	src/main.c \
 	 	src/utils.c \
 		src/lexer.c \
 		src/split_shell.c \
+		src/lexer_utils.c \
+		src/parser.c \
+		src/parser_redir.c \
+		src/parser_quotes.c \
+		src/parser_fd.c \
 
 AUTHOR = jlimones / abarriga
 DATE = 21/03/2023

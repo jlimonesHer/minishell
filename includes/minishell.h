@@ -11,15 +11,34 @@
 # include <sys/ioctl.h>
 # include <sys/wait.h>
 
+// typedef struct s_command {
+// 	int		n_cmds;
+// 	char	**split_input;
+// }			t_command;
+
 typedef struct s_command {
-	int		argc;
-	char	**argv;
-}			t_command;
+	char		**argv;
+	char		**infile;
+	int			fd_in;
+	char		**outfile;
+	int			fd_out;
+	int			*double_out;
+	int			last;
+}				t_command;
 
-typedef struct s_cmd_table
-{
-
-}	t_cmd_table;
+typedef struct s_fill {
+	int	cmd;
+	int	pos;
+	int	j;
+	int	i;
+	int	a;
+	int	final;
+	int	redir_in;
+	int	c_in;
+	int	redir_out;
+	int	c_out;
+	int	num_r_in;
+	int	num_r_out;
 
 // typedef struct s_quote
 // {
@@ -31,29 +50,44 @@ typedef struct s_cmd_table
 // }	t_quote;
 /* utils.c */
 void	ft_exit(char *cmd);
+}				t_fill;
 
+typedef struct s_expand {
+	int		i;
+	int		j;
+	int		bg;
+	char	*var;
+}				t_expand;
 
+/* utils.c */
+void		ft_exit(char *cmd);
 
 /*lexer.c*/
-int		check_input_quotes(char *input);
-char	**lexer(char *input);
-int		ft_issame(char c, char *str);
+int			check_input_quotes(char *input);
+char		**lexer(char *input);
+int			ft_issame(char c, char *str);
 
 /*split_shell.c*/
-
-int			count_quote_word(char *s, char quote);
-int			check_doubleredir(char *s);
 int			check_word(char *s);
 int			count_words(char *s);
 int			fill_cmd(char *input, int num_words, char **strs);
 int			check_redir(char **strs);
 char		**split_shell(char *input);
-char		**ft_freewords(int words, char **tab);
-
-
-
-
 
 /*lexer_utils.c*/
+int			count_quote_word(char *s, char quote);
+int			check_doubleredir(char *s);
+char		**ft_freewords(int words, char **tab);
 
+/*parser.c*/
+t_command	*parser(char *input);
+int			count_cmds(char **split_input);
+void		last_cmd_table(t_command *b, int n_cmds);
+void		fill_cmds(t_command *b, char **split_input);
+void		create_cmd(t_command *b, char	**split_input, t_fill *var);
+void		count_redir(char	**split_input, t_fill *var, t_command *b);
+void		create_infile(t_command *b, char **split_input, t_fill *var);
+void		create_outfile(t_command *b, char **split_input, t_fill *var);
+void		take_fd(t_command *b);
+void		expand_quotes(t_command *b);
 #endif
