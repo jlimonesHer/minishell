@@ -3,14 +3,14 @@
 t_command	*parser(char *input)
 {
 	t_command	*b;
-	int			n_cmds;
+	t_cmd_table	count;
 	char		**split_input;
 
 	split_input = lexer(input);
 	//comprobar la creacion del char** ha sido correcta
-	n_cmds = count_cmds(split_input);
-	b = ft_calloc(sizeof(t_command), (n_cmds + 1));
-	last_cmd_table(b, n_cmds);
+	count.n_cmds = count_cmds(split_input);
+	b = ft_calloc(sizeof(t_command), (count.n_cmds + 1));
+	last_cmd_table(b, count.n_cmds);
 	if (!b)
 		perror("Error");
 	fill_cmds(b, split_input);

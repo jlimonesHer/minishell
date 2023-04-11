@@ -11,10 +11,9 @@
 # include <sys/ioctl.h>
 # include <sys/wait.h>
 
-// typedef struct s_command {
-// 	int		n_cmds;
-// 	char	**split_input;
-// }			t_command;
+typedef struct s_cmd_table {
+	int		n_cmds;
+}			t_cmd_table;
 
 typedef struct s_command {
 	char		**argv;
