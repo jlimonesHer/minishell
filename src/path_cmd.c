@@ -47,31 +47,32 @@ char	*search_path(char **envp, char *cmd)
  * @param i indice de comando
  * @return int pid de hijo creado
  */
-static int	ft_create_child(t_cmd_table *cmds, char **env, int i)
+static int	ft_create_child(t_command *cmds, char **env, int i)
 {
 	int		pid;
 	char	*shell;
 
-	if (exec_builtin(cmds->cmds[i].argv, env))
+	if (exec_builtin(cmds->argv, env))
 		return (-1);
 	pid = fork();
 	if (pid == 0)
 	{
-		shell = search_path(env, cmds->cmds[i].argv[0]);
+		shell = search_path(env, cmds->argv[0]);
+		printf("shell = %s\n", shell);
 		if (shell == NULL)
 		{
-			ft_putstr_fd(cmds->cmds[i].argv[0], 2);
+			ft_putstr_fd(cmds->argv[i], 2);
 			ft_putstr_fd(": command no found\n", 2);
 			exit(-1);
 		}
-		execve(shell, cmds->cmds[i].argv, env);
+		execve(shell, &cmds->argv[i], env);
 		perror("Error: ");
 		exit(-1);
 	}
 	return (pid);
 }
 
-void	ft_one_cmd(t_cmd_table *cmds, char **env)
+void	ft_one_cmd(t_command *cmds, char **env)
 {
 	int			i;
 	int			pid;

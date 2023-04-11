@@ -55,19 +55,6 @@ static	void	ft_cd(char **argv)
 	}
 }
 
-/*Funcion hecha por alberto para borrar*/
-
-int	ft_issame(char c, char *str)
-{
-	while (*str)
-	{
-		if (*str == c)
-			return (1);
-		str++;
-	}
-	return (0);
-}
-
 void	ft_export(char *argv, char ***env)
 {
 	int		i;

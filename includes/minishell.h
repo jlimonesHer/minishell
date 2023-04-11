@@ -12,10 +12,6 @@
 # include <sys/ioctl.h>
 # include <sys/wait.h>
 
-typedef struct s_cmd_table {
-	int		n_cmds;
-}			t_cmd_table;
-
 typedef struct s_command {
 	char		**argv;
 	char		**infile;
@@ -23,16 +19,9 @@ typedef struct s_command {
 	char		**outfile;
 	int			fd_out;
 	int			*double_out;
+	int			n_cmds;
 	int			last;
 }				t_command;
-
-// typedef struct s_cmd_table
-// {
-// 	int			n_cmds;
-// 	t_command	*cmds;
-// 	char		*infile;
-// 	char		*outfile;
-// }	t_cmd_table;
 
 typedef struct s_fd_pipes
 {
@@ -98,7 +87,7 @@ void		expand_quotes(t_command *b);
 
 /*path_cmd.c*/
 char		*search_path(char **envp, char *cmd);
-void		ft_one_cmd(t_cmd_table *cmds, char **env);
+void		ft_one_cmd(t_command *cmds, char **env);
 
 /*builtin.c*/
 void		ft_pwd(void);
