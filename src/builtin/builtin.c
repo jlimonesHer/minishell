@@ -2,10 +2,11 @@
 
 void	ft_pwd(void)
 {
-	char	buffer[1000];
+	char	*buffer;
 
-	getcwd(buffer, 1000);
-	printf("%s\n", buffer);
+	buffer = getcwd(NULL, 0);
+	ft_putendl_fd(buffer, 1);
+	free(buffer);
 }
 
 void	ft_echo(char **argv)
@@ -87,7 +88,6 @@ void	ft_env(char **env)
 int	exec_builtin(char **argv, char **env)
 {
 	int	build;
-
 	build = 1;
 	if (!ft_strncmp(argv[0], "pwd", 4))
 		ft_pwd();

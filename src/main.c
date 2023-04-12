@@ -10,11 +10,10 @@ int main(int ac, char **av, char **env)
 	{
 		while (1)
 		{
-			
 			input = readline("minishell> ");
 			add_history(input);
 			a = parser(input);
-			ft_one_cmd(a, env);
+			executor(a, env);
 		}
 	}
 }

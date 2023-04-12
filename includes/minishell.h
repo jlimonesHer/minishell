@@ -87,7 +87,7 @@ void		expand_quotes(t_command *b);
 
 /*path_cmd.c*/
 char		*search_path(char **envp, char *cmd);
-void		ft_one_cmd(t_command *cmds, char **env);
+void		executor(t_command *cmds, char **env);
 
 /*builtin.c*/
 void		ft_pwd(void);

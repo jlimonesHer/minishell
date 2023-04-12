@@ -10,16 +10,16 @@
  * @param cmd comando del que buscar la ruta.
  * @return char* a ruta del comando
  */
-char	*search_path(char **envp, char *cmd)
+char	*search_path(char **env, char *cmd)
 {
 	char	**paths;
 	char	*path_cmd;
 	char	*substr;
 
 	cmd = *ft_split(cmd, ' ');
-	while (*envp && !ft_strnstr(*envp, "PATH=", 5))
-		envp++;
-	substr = ft_substr(*envp, 5, ft_strlen(*envp) - 5);
+	while (*env && !ft_strnstr(*env, "PATH=", 5))
+		env++;
+	substr = ft_substr(*env, 5, ft_strlen(*env) - 5);
 	paths = ft_split(substr, ':');
 	substr = ft_strjoin("/", cmd);
 	free(cmd);
@@ -47,7 +47,7 @@ char	*search_path(char **envp, char *cmd)
  * @param i indice de comando
  * @return int pid de hijo creado
  */
-static int	ft_create_child(t_command *cmds, char **env, int i)
+static int	ft_create_child(t_command *cmds, char **env)
 {
 	int		pid;
 	char	*shell;
@@ -57,39 +57,40 @@ static int	ft_create_child(t_command *cmds, char **env, int i)
 	pid = fork();
 	if (pid == 0)
 	{
-		shell = search_path(env, *cmds[i].argv);
+		shell = search_path(env, cmds->argv[0]);
 		if (shell == NULL)
 		{
 			ft_putstr_fd(": command no found\n", 2);
 			exit(-1);
 		}
-		execve(shell, &cmds[i].argv[0], env);
-		perror("Error: ");
-		exit(-1);
+		execve(shell, &cmds->argv[0], env);
 	}
 	return (pid);
 }
 
-void	ft_one_cmd(t_command *cmds, char **env)
+/**
+ * @brief loop creado para partir la funcion executor descrita debajo
+ * 
+ * @param cmds estructura de datos
+ * @param t_pipe estructura de fds
+ * @param env variables globales
+ */
+static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char **env)
 {
-	int			i;
-	int			pid;
-	int			status;
-	int			fds[2];
-	t_fd_pipes	*t_pipe;
+	int	i;
+	int	pid;
+	int	status;
+	int	fds[2];
 
-	t_pipe = malloc(sizeof(t_fd_pipes));
 	i = -1;
-	t_pipe->fdin = dup(0);
-	t_pipe->tmpin = dup(0);
-	t_pipe->tmpout = dup(1);
 	while (++i < cmds->n_cmds)
 	{
 		dup2(t_pipe->fdin, 0);
 		close(t_pipe->fdin);
 		if (i != cmds->n_cmds - 1)
 		{
-			pipe(fds); //controlar errores
+			if (pipe(fds) == -1)
+				return (perror("Error:"));
 			t_pipe->fdout = fds[1];
 			t_pipe->fdin = fds[0];
 		}
@@ -97,12 +98,28 @@ void	ft_one_cmd(t_command *cmds, char **env)
 			t_pipe->fdout = dup(t_pipe->tmpout);
 		dup2(t_pipe->fdout, 1);
 		close(t_pipe->fdout);
-		pid = ft_create_child(cmds, env, i);
-		printf("%i\n", i);
-		printf("%i\n", cmds->n_cmds);
+		pid = ft_create_child(&cmds[i], env);
 		if (i == cmds->n_cmds - 1)
 			waitpid(pid, &status, 0);
 	}
+}
+
+/**
+ * @brief funcion para crear los procesos necesarios para ejecutar los comandos
+ * introducidos
+ * 
+ * @param cmds estructura de datos
+ * @param env variables globales
+ */
+void	executor(t_command *cmds, char **env)
+{
+	t_fd_pipes	*t_pipe;
+
+	t_pipe = malloc(sizeof(t_fd_pipes));
+	t_pipe->fdin = dup(0);
+	t_pipe->tmpin = dup(0);
+	t_pipe->tmpout = dup(1);
+	loop_cmds(cmds, t_pipe, env);
 	dup2(t_pipe->tmpin, 0);
 	dup2(t_pipe->tmpout, 1);
 	close(t_pipe->tmpin);
