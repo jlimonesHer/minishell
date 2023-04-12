@@ -45,7 +45,12 @@ typedef struct s_expand {
 	int		i;
 	int		j;
 	int		bg;
+	int		first;
 	char	*var;
+	char	*env;
+	char	*line;
+	char	*sub;
+	char	*join;
 }				t_expand;
 
 /* utils.c */
@@ -69,14 +74,19 @@ int			check_doubleredir(char *s);
 char		**ft_freewords(int words, char **tab);
 
 /*parser.c*/
-t_command	*parser(char *input);
+t_command	*parser(char *input, char **envp);
 int			count_cmds(char **split_input);
 void		last_cmd_table(t_command *b, int n_cmds);
-void		fill_cmds(t_command *b, char **split_input);
+void		fill_cmds(t_command *b, char **split_input, char **envp);
 void		create_cmd(t_command *b, char	**split_input, t_fill *var);
 void		count_redir(char	**split_input, t_fill *var, t_command *b);
 void		create_infile(t_command *b, char **split_input, t_fill *var);
 void		create_outfile(t_command *b, char **split_input, t_fill *var);
 void		take_fd(t_command *b);
-void		expand_quotes(t_command *b);
-#endif
+char		*expand_quotes(char *cmd, char **envp);
+
+/*parser_quotes.c*/
+void		expand(t_command *b, char **envp);
+char		*search_env(char *var, char **envp);
+void	free_quotes(t_expand *e);
+#endif 

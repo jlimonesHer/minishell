@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-t_command	*parser(char *input)
+t_command	*parser(char *input, char **envp)
 {
 	t_command	*b;
 	t_cmd_table	count;
@@ -13,11 +13,11 @@ t_command	*parser(char *input)
 	last_cmd_table(b, count.n_cmds);
 	if (!b)
 		perror("Error");
-	fill_cmds(b, split_input);
+	fill_cmds(b, split_input, envp);
 	return (b);
 }
 
-void	fill_cmds(t_command *b, char **split_input)
+void	fill_cmds(t_command *b, char **split_input, char **envp)
 {
 	t_fill	var;
 
@@ -45,7 +45,7 @@ void	fill_cmds(t_command *b, char **split_input)
 		}
 	}
 	take_fd(b);
-	expand_quotes(b);
+	expand(b, envp);
 }
 
 void	create_cmd(t_command *b, char	**split_input, t_fill *var)

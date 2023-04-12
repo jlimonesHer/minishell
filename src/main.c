@@ -1,17 +1,19 @@
 #include "../includes/minishell.h"
 #include <sys/stat.h>
 
-int main()
+int main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_command	*a;
 	int			i;
 	int			j;
+	(void)argc;
+	(void)argv;
 	while (1)
 	{
 		i = 0;
 		input = readline("> ");
-		a = parser(input);
+		a = parser(input, envp);
 		add_history(input);
 		j = 0;
 		while (!a[j].last)
@@ -25,5 +27,6 @@ int main()
 			}
 			j++;
 		}
+		// system("leaks minishell");
 	}
 }
