@@ -13,6 +13,8 @@ int main(int argc, char **argv, char **envp)
 	{
 		i = 0;
 		input = readline("> ");
+		if (input[0] == '\0')
+			continue ;
 		a = parser(input, envp);
 		add_history(input);
 		j = 0;

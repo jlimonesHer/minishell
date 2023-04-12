@@ -88,5 +88,6 @@ char		*expand_quotes(char *cmd, char **envp);
 /*parser_quotes.c*/
 void		expand(t_command *b, char **envp);
 char		*search_env(char *var, char **envp);
-void	free_quotes(t_expand *e);
+void		free_quotes(t_expand *e);
+char		*expand_text(char *cmd, char **envp);
 #endif 

@@ -11,14 +11,30 @@ void	expand(t_command *b, char **envp)
 		{
 			if (ft_issame(b->argv[e.i][0], "\""))
 				b->argv[e.i] = expand_quotes(&b->argv[e.i][1], envp);
-			// else if (ft_issame(b->argv[e.i][0], "\'"))
-			// 	b->argv[e.i] = remove_quote(b->argv[e.i]);
-			// else
-			// 	b->argv[e.i] = expand_text(b->argv[e.i]);
+			else if (ft_issame(b->argv[e.i][0], "\'"))
+				b->argv[e.i] = remove_quote(b->argv[e.i]);
+			else
+				b->argv[e.i] = expand_text(b->argv[e.i], envp);
 			e.i++;
 		}
 		b++;
 	}
+}
+
+
+// char	*remove_quote()
+// {
+
+// }
+
+char	*expand_text(char *cmd, char **envp)
+{
+	// t_expand	e;
+	// printf("comando:%s\n", cmd);
+	if (cmd[0] == '$')
+		cmd = search_env(&cmd[1], envp);
+	// printf("este es el env %s\n", e.env);
+	return (cmd);
 }
 
 char	*expand_quotes(char *cmd, char **envp)
