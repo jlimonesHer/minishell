@@ -14,6 +14,7 @@ t_command	*parser(char *input, char **envp)
 	if (!b)
 		perror("Error");
 	fill_cmds(b, split_input, envp);
+	ft_freewords(-1, split_input);
 	return (b);
 }
 

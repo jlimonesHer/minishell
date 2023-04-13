@@ -90,4 +90,5 @@ void		expand(t_command *b, char **envp);
 char		*search_env(char *var, char **envp);
 void		free_quotes(t_expand *e);
 char		*expand_text(char *cmd, char **envp);
+char		*remove_quote(char *cmd);
 #endif 

@@ -17,6 +17,7 @@ int main(int argc, char **argv, char **envp)
 			continue ;
 		a = parser(input, envp);
 		add_history(input);
+		free(input);
 		j = 0;
 		while (!a[j].last)
 		{
@@ -29,6 +30,6 @@ int main(int argc, char **argv, char **envp)
 			}
 			j++;
 		}
-		// system("leaks minishell");
+		system("leaks minishell");
 	}
 }

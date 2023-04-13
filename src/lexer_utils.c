@@ -23,6 +23,9 @@ char	**ft_freewords(int words, char **tab)
 	int	i;
 
 	i = 0;
+	if (words == -1)
+		while (tab[words])
+			words++;
 	while (i < words)
 	{
 		free(tab[i]);

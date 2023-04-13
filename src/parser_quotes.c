@@ -12,7 +12,7 @@ void	expand(t_command *b, char **envp)
 			if (ft_issame(b->argv[e.i][0], "\""))
 				b->argv[e.i] = expand_quotes(&b->argv[e.i][1], envp);
 			else if (ft_issame(b->argv[e.i][0], "\'"))
-				b->argv[e.i] = remove_quote(b->argv[e.i]);
+				b->argv[e.i] = remove_quote(&b->argv[e.i][1]);
 			else
 				b->argv[e.i] = expand_text(b->argv[e.i], envp);
 			e.i++;
@@ -22,18 +22,20 @@ void	expand(t_command *b, char **envp)
 }
 
 
-// char	*remove_quote()
-// {
+char	*remove_quote(char *cmd)
+{
+	int	len;
 
-// }
+	len = ft_strlen(cmd);
+	cmd[len - 1] = '\0';
+	return (cmd);
+
+}
 
 char	*expand_text(char *cmd, char **envp)
 {
-	// t_expand	e;
-	// printf("comando:%s\n", cmd);
 	if (cmd[0] == '$')
 		cmd = search_env(&cmd[1], envp);
-	// printf("este es el env %s\n", e.env);
 	return (cmd);
 }
 
@@ -84,74 +86,12 @@ char	*search_env(char *var, char **envp)
 	str = ft_strjoin(var, "=");
 	len = ft_strlen(str);
 	while (ft_strnstr(envp[i], str, len) == 0)
+	{
+		if (!envp[i + 1])
+			perror("ERROR var envp");
 		i++;
-	if (!envp[i + 1])
-		perror("ERROR var envp");
+	}
 	len_str = ft_strlen(envp[i]);
 	var = ft_substr(envp[i], len, (len_str - len));
 	return (var);
 }
-
-// void	expand_quotes(t_command *b)
-// {
-// 	t_expand	e;
-
-// 	e.i = 0;
-// 	while (b->last != 1)
-// 	{
-// 		while (b->argv[e.i])
-// 		{
-// 			e.j = 0;
-// 			if (!ft_issame(b->argv[e.i][0], "\'"))
-// 			{
-// 				while (b->argv[e.i][e.j])
-// 				{
-// 					if (b->argv[e.i][e.j] == '$')
-// 					{
-// 						e.bg = e.j;
-// 						while (!ft_issame(b->argv[e.i][e.j], " \""))
-// 							e.j++;
-// 						e.var = ft_calloc(e.j - e.bg, sizeof(char));
-// 						ft_strlcpy(e.var, &b->argv[e.i][e.bg + 1], e.j - (e.bg));
-// 						printf("Esta la variable de entorno:%s\n", e.var);
-// 					}
-// 					e.j++;
-// 				}
-// 			}
-// 			e.i++;
-// 		}
-// 		b++;
-// 	}
-// }
-
-// void	expand_quotes(t_command *b)
-// {
-// 	t_expand	e;
-
-// 	e.i = 0;
-// 	while (b->last != 1)
-// 	{
-// 		while (b->argv[e.i])
-// 		{
-// 			e.j = 0;
-// 			if (!ft_issame(b->argv[e.i][0], "\'"))
-// 			{
-// 				while (b->argv[e.i][e.j])
-// 				{
-// 					if (b->argv[e.i][e.j] == '$')
-// 					{
-// 						e.bg = e.j;
-// 						while (!ft_issame(b->argv[e.i][e.j], " \""))
-// 							e.j++;
-// 						e.var = ft_calloc(e.j - e.bg + 1, sizeof(char));
-// 						ft_strlcpy(e.var, &b->argv[e.i][e.bg + 1], e.j - e.bg);
-// 						printf("Esta la variable de entorno:%s\n", e.var);
-// 					}
-// 					e.j++;
-// 				}
-// 			}
-// 			e.i++;
-// 		}
-// 		b++;
-// 	}
-// }
