@@ -8,6 +8,7 @@ SRC = 	src/main.c \
 		src/split_shell.c \
 		src/path_cmd.c \
 		src/builtin/builtin.c \
+		src/builtin/utils_builtin.c \
 		src/lexer_utils.c \
 		src/parser.c \
 		src/parser_redir.c \

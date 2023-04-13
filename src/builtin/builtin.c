@@ -56,36 +56,16 @@ static	void	ft_cd(char **argv)
 	}
 }
 
-void	ft_export(char *argv, char ***env)
-{
-	int		i;
-	char	key[100];
-
-	i = -1;
-	while (argv[++i] && (ft_isalnum(argv[i]) || ft_issame(argv[i], "?_"))
-		&& argv[i] != '=')
-		key[i] = argv[i];
-	key[i] = '\0';
-	if (argv[i] != '=')
-	{
-		ft_putstr_fd("export: ", 2);
-		ft_putstr_fd(argv, 2);
-		ft_putstr_fd(": not a valid identifier\n", 2);
-	}
-	else
-		printf("%s\n", env[0][0]);
-}
-
-void	ft_env(char **env)
+void	ft_env(char **envp)
 {
 	int		i;
 
 	i = -1;
-	while (env[++i])
-		printf("%s\n", env[i]);
+	while (envp[++i])
+		printf("%s\n", envp[i]);
 }
 
-int	exec_builtin(char **argv, char **env)
+int	exec_builtin(char **argv, char **envp)
 {
 	int	build;
 	build = 1;
@@ -96,11 +76,11 @@ int	exec_builtin(char **argv, char **env)
 	else if (!ft_strncmp(argv[0], "cd", 3))
 		ft_cd(argv);
 	else if (!ft_strncmp(argv[0], "export", 7))
-		ft_export(argv[1], &env);
+		ft_export(argv[1], envp);
 	else if (!ft_strncmp(argv[0], "unset", 6))
 		printf("unset\n");
 	else if (!ft_strncmp(argv[0], "env", 4))
-		ft_env(env);
+		ft_env(envp);
 	else if (!ft_strncmp(argv[0], "exit", 5))
 		printf("exit\n");
 	else

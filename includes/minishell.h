@@ -91,6 +91,8 @@ void		executor(t_command *cmds, char **env);
 
 /*builtin.c*/
 void		ft_pwd(void);
-//void	ft_echo(char *argv);
+//void		ft_echo(char *argv);
+char		**env_copy(char **env);
 int			exec_builtin(char **argv, char **env);
+void		ft_export(char *argv, char **env);
 #endif
