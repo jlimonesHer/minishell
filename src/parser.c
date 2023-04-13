@@ -7,18 +7,21 @@ t_command	*parser(char *input, char **envp)
 	char		**split_input;
 
 	split_input = lexer(input);
-	//comprobar la creacion del char** ha sido correcta
+	if (split_input == NULL)
+		return (ft_putstr_fd("Error: invalid quotes\n", 2), NULL);
 	count.n_cmds = count_cmds(split_input);
 	b = ft_calloc(sizeof(t_command), (count.n_cmds + 1));
 	last_cmd_table(b, count.n_cmds);
 	if (!b)
-		perror("Error");
-	fill_cmds(b, split_input, envp);
+		return (perror("Error"), NULL);
+	fill_cmds(b, split_input);
+	take_fd(b);
+	expand(b, envp);
 	ft_freewords(-1, split_input);
 	return (b);
 }
 
-void	fill_cmds(t_command *b, char **split_input, char **envp)
+void	fill_cmds(t_command *b, char **split_input)
 {
 	t_fill	var;
 
@@ -45,8 +48,6 @@ void	fill_cmds(t_command *b, char **split_input, char **envp)
 			var.cmd++;
 		}
 	}
-	take_fd(b);
-	expand(b, envp);
 }
 
 void	create_cmd(t_command *b, char	**split_input, t_fill *var)

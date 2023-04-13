@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-void	take_fd(t_command *b)
+int	take_fd(t_command *b)
 {
 	int	i;
 
@@ -13,7 +13,7 @@ void	take_fd(t_command *b)
 				close(b->fd_in);
 			b->fd_in = open(b->infile[i], O_RDONLY);
 			if (b->fd_in == -1)
-				perror("ERROR");
+				return (perror("Error"), 1);
 		}
 		i = -1;
 		while (b->outfile[++i])
@@ -27,8 +27,9 @@ void	take_fd(t_command *b)
 				b->fd_out = open(b->outfile[i],
 						O_WRONLY | O_CREAT | O_APPEND, 0644);
 			if (b->fd_out == -1)
-				perror("ERROR FILE OUTFILE");
+				return (perror("Error"), 1);
 		}
 		b++;
 	}
+	return (1);
 }

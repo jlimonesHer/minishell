@@ -21,7 +21,6 @@ void	expand(t_command *b, char **envp)
 	}
 }
 
-
 char	*remove_quote(char *cmd)
 {
 	int	len;
@@ -29,13 +28,16 @@ char	*remove_quote(char *cmd)
 	len = ft_strlen(cmd);
 	cmd[len - 1] = '\0';
 	return (cmd);
-
 }
 
 char	*expand_text(char *cmd, char **envp)
 {
 	if (cmd[0] == '$')
+	{
 		cmd = search_env(&cmd[1], envp);
+		if (cmd == NULL)
+			return (NULL);
+	}
 	return (cmd);
 }
 
@@ -43,8 +45,9 @@ char	*expand_quotes(char *cmd, char **envp)
 {
 	t_expand	e;
 
-	e.j = 0;
-	while (cmd[e.j])
+	e.j = -1;
+	e.join = NULL;
+	while (cmd[++(e.j)])
 	{
 		if (cmd[e.j] == '$')
 		{
@@ -61,18 +64,10 @@ char	*expand_quotes(char *cmd, char **envp)
 			cmd = e.join;
 			free_quotes(&e);
 		}
-		e.j++;
 	}
-	e.join[ft_strlen(e.join) - 1] = '\0';
-	return (e.join);
-}
-
-void	free_quotes(t_expand *e)
-{
-	free(e->var);
-	free(e->env);
-	free(e->line);
-	free(e->sub);
+	if (e.join == NULL)
+		e.join = ft_strdup(cmd);
+	return (e.join[ft_strlen(e.join) - 1] = '\0', e.join);
 }
 
 char	*search_env(char *var, char **envp)
@@ -88,7 +83,7 @@ char	*search_env(char *var, char **envp)
 	while (ft_strnstr(envp[i], str, len) == 0)
 	{
 		if (!envp[i + 1])
-			perror("ERROR var envp");
+			return (ft_strdup(""));
 		i++;
 	}
 	len_str = ft_strlen(envp[i]);
