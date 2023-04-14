@@ -6,7 +6,6 @@ int	take_fd(t_command *b)
 
 	while (b->last != 1)
 	{
-		printf("llego\n");
 		i = -1;
 		while (b->infile[++i])
 		{

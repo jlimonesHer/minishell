@@ -17,22 +17,7 @@ t_command	*parser(char *input, char **envp)
 	fill_cmds(b, split_input);
 	if (take_fd(b))
 		return (NULL);
-	printf("llega al final del parser\n");
-	// int j= 0;
-	// int i;
-	// 	while (!b[j].last)
-	// 	{
-	// 		printf("Comando %d\n", j);
-	// 		i = 0;
-	// 		while (b[j].argv && b[j].argv[i])
-	// 		{
-	// 			printf("%s\n", b[j].argv[i]);
-	// 			i++;
-	// 		}
-	// 		j++;
-	// 	}
 	expand(b, envp);
-	
 	ft_freewords(-1, split_input);
 	return (b);
 }
@@ -58,8 +43,6 @@ void	fill_cmds(t_command *b, char **split_input)
 			else
 				create_cmd(b, split_input, &var);
 		}
-		// b[var.cmd].argv[var.j] = ft_calloc(1, sizeof(char *));
-		// b[var.cmd].argv[var.j++] = ft_strdup(split_input[var.i++]);
 		if (split_input[var.i] && ft_issame(split_input[var.i][0], "|"))
 		{
 			var.i++;

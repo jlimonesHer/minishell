@@ -21,12 +21,10 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		a = parser(input, envp);
-		printf("ha llegado despues del parser\n");
 		if (a == NULL)
 			continue ;
 		free(input);
 		j = 0;
-		printf("ha llegado\n");
 		while (!a[j].last)
 		{
 			printf("Comando %d\n", j);
@@ -39,7 +37,7 @@ int	main(int argc, char **argv, char **envp)
 			j++;
 		}
 		ft_free_struct(a);
-		system("leaks minishell");
+		// system("leaks minishell");
 	}
 }
 
