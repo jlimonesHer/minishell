@@ -47,12 +47,12 @@ char	*search_path(char **env, char *cmd)
  * @param i indice de comando
  * @return int pid de hijo creado
  */
-static int	ft_create_child(t_command *cmds, char **env)
+static int	ft_create_child(t_command *cmds, char **env, char **var_export)
 {
 	int		pid;
 	char	*shell;
 
-	if (exec_builtin(cmds->argv, env))
+	if (exec_builtin(cmds->argv, env, var_export))
 		return (-1);
 	pid = fork();
 	if (pid == 0)
@@ -75,7 +75,8 @@ static int	ft_create_child(t_command *cmds, char **env)
  * @param t_pipe estructura de fds
  * @param env variables globales
  */
-static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char **env)
+static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char **env,
+	char **var_export)
 {
 	int	i;
 	int	pid;
@@ -98,7 +99,7 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char **env)
 			t_pipe->fdout = dup(t_pipe->tmpout);
 		dup2(t_pipe->fdout, 1);
 		close(t_pipe->fdout);
-		pid = ft_create_child(&cmds[i], env);
+		pid = ft_create_child(&cmds[i], env, var_export);
 		if (i == cmds->n_cmds - 1)
 			waitpid(pid, &status, 0);
 	}
@@ -111,7 +112,7 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char **env)
  * @param cmds estructura de datos
  * @param env variables globales
  */
-void	executor(t_command *cmds, char **env)
+void	executor(t_command *cmds, char **env, char **var_export)
 {
 	t_fd_pipes	*t_pipe;
 
@@ -119,7 +120,7 @@ void	executor(t_command *cmds, char **env)
 	t_pipe->fdin = dup(0);
 	t_pipe->tmpin = dup(0);
 	t_pipe->tmpout = dup(1);
-	loop_cmds(cmds, t_pipe, env);
+	loop_cmds(cmds, t_pipe, env, var_export);
 	dup2(t_pipe->tmpin, 0);
 	dup2(t_pipe->tmpout, 1);
 	close(t_pipe->tmpin);

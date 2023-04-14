@@ -68,6 +68,7 @@ void	ft_env(char **envp)
 int	exec_builtin(char **argv, char **envp)
 {
 	int	build;
+
 	build = 1;
 	if (!ft_strncmp(argv[0], "pwd", 4))
 		ft_pwd();
