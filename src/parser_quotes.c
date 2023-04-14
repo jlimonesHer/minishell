@@ -4,10 +4,10 @@ void	expand(t_command *b, char **envp)
 {
 	t_expand	e;
 
-	e.i = 0;
 	while (b->last != 1)
 	{
-		while (b->argv[e.i])
+		e.i = -1;
+		while (b->argv && b->argv[++e.i])
 		{
 			if (ft_issame(b->argv[e.i][0], "\""))
 				b->argv[e.i] = expand_quotes(&b->argv[e.i][1], envp);
@@ -15,7 +15,6 @@ void	expand(t_command *b, char **envp)
 				b->argv[e.i] = remove_quote(&b->argv[e.i][1]);
 			else
 				b->argv[e.i] = expand_text(b->argv[e.i], envp);
-			e.i++;
 		}
 		b++;
 	}

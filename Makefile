@@ -48,7 +48,7 @@ endif
 
 $(NAME): $(SRC) $(OBJ)
 	@make -C libft
-	@gcc -o $(NAME) $(FLAGS) $(SRC) $(LIB) $(LIBFT)
+	@gcc -g3 -o $(NAME) $(FLAGS) $(SRC) $(LIB) $(LIBFT)
 	@printf "%b" "$(OK_COLOR)" "minishell compilado\n"
 
 skiperror:

@@ -14,17 +14,19 @@ int	main(int argc, char **argv, char **envp)
 	{
 		i = 0;
 		input = readline("> ");
+		add_history(input);
 		if (input[0] == '\0')
 		{
 			free(input);
 			continue ;
 		}
 		a = parser(input, envp);
+		printf("ha llegado despues del parser\n");
 		if (a == NULL)
 			continue ;
-		add_history(input);
 		free(input);
 		j = 0;
+		printf("ha llegado\n");
 		while (!a[j].last)
 		{
 			printf("Comando %d\n", j);
@@ -49,9 +51,12 @@ void	ft_free_struct(t_command	*a)
 	while (a[i].last != 1)
 	{
 		ft_freewords(-1, a[i].argv);
-		ft_freewords(-1, a[i].infile);
-		ft_freewords(-1, a[i].outfile);
-		free(a[i].double_out);
+		if (a[i].infile)
+			ft_freewords(-1, a[i].infile);
+		if (a[i].outfile)
+			ft_freewords(-1, a[i].outfile);
+		if (a[i].double_out)
+			free(a[i].double_out);
 		i++;
 	}
 	free(a);

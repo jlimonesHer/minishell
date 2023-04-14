@@ -6,6 +6,7 @@ int	take_fd(t_command *b)
 
 	while (b->last != 1)
 	{
+		printf("llego\n");
 		i = -1;
 		while (b->infile[++i])
 		{
@@ -27,9 +28,9 @@ int	take_fd(t_command *b)
 				b->fd_out = open(b->outfile[i],
 						O_WRONLY | O_CREAT | O_APPEND, 0644);
 			if (b->fd_out == -1)
-				return (perror("Error"), 1);
+				return (perror("Error en fd de salida"), 1);
 		}
 		b++;
 	}
-	return (1);
+	return (0);
 }
