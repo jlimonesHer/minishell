@@ -87,12 +87,14 @@ void		expand_quotes(t_command *b);
 
 /*path_cmd.c*/
 char		*search_path(char **envp, char *cmd);
-void		executor(t_command *cmds, char **env, char **var_export);
+void		executor(t_command *cmds, char ***env, char ***var_export);
 
 /*builtin.c*/
 void		ft_pwd(void);
+void		ft_env(char **envp);
 //void		ft_echo(char *argv);
 char		**env_copy(char **env);
-int			exec_builtin(char **argv, char **env);
-int			ft_export(char *argv, char **env, char **var_export);
+int			exec_builtin(char **argv, char ***env, char ***var_export);
+void		ft_export(char *argv, char ***env, char ***var_export);
+char		**add_export(char ***envp, char *var_export);
 #endif

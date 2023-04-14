@@ -14,10 +14,11 @@ int main(int ac, char **av, char **env)
 	{
 		while (1)
 		{
+			//var_export = add_export(envp, var_export);
 			input = readline("minishell> ");
 			add_history(input);
 			a = parser(input);
-			executor(a, envp, var_export);
+			executor(a, &envp, &var_export);
 		}
 	}
 }

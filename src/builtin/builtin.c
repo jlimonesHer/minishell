@@ -65,11 +65,11 @@ void	ft_env(char **envp)
 		printf("%s\n", envp[i]);
 }
 
-int	exec_builtin(char **argv, char **envp)
+int	exec_builtin(char **argv, char ***envp, char ***var_export)
 {
-	int	build;
+	int	is_build;
 
-	build = 1;
+	is_build = 1;
 	if (!ft_strncmp(argv[0], "pwd", 4))
 		ft_pwd();
 	else if (!ft_strncmp(argv[0], "echo", 5))
@@ -77,14 +77,14 @@ int	exec_builtin(char **argv, char **envp)
 	else if (!ft_strncmp(argv[0], "cd", 3))
 		ft_cd(argv);
 	else if (!ft_strncmp(argv[0], "export", 7))
-		ft_export(argv[1], envp);
+		ft_export(argv[1], envp, var_export);
 	else if (!ft_strncmp(argv[0], "unset", 6))
 		printf("unset\n");
 	else if (!ft_strncmp(argv[0], "env", 4))
-		ft_env(envp);
+		ft_env(*envp);
 	else if (!ft_strncmp(argv[0], "exit", 5))
 		printf("exit\n");
 	else
-		build = 0;
-	return (build);
+		is_build = 0;
+	return (is_build);
 }
