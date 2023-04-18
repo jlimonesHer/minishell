@@ -30,10 +30,7 @@ char	**lexer(char *input)
 	char	**split_input;
 
 	if (check_input_quotes(input))
-	{
-		printf("ERROR");
 		return (NULL);
-	}
 	split_input = split_shell(input);
 	return (split_input);
 }

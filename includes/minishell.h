@@ -50,11 +50,19 @@ typedef struct s_expand {
 	int		i;
 	int		j;
 	int		bg;
+	int		first;
 	char	*var;
+	char	*env;
+	char	*line;
+	char	*sub;
+	char	*join;
 }				t_expand;
 
 /* utils.c */
 void		ft_exit(char *cmd);
+void		ft_free_struct(t_command	*a);
+void		free_quotes(t_expand *e);
+void		free_first_quotes(t_expand *e);
 
 /*lexer.c*/
 int			check_input_quotes(char *input);
@@ -74,11 +82,13 @@ int			check_doubleredir(char *s);
 char		**ft_freewords(int words, char **tab);
 
 /*parser.c*/
-t_command	*parser(char *input);
+t_command	*parser(char *input, char **envp);
 int			count_cmds(char **split_input);
 void		last_cmd_table(t_command *b, int n_cmds);
 void		fill_cmds(t_command *b, char **split_input);
 void		create_cmd(t_command *b, char	**split_input, t_fill *var);
+
+/*parser_quotes.c*/
 void		count_redir(char	**split_input, t_fill *var, t_command *b);
 void		create_infile(t_command *b, char **split_input, t_fill *var);
 void		create_outfile(t_command *b, char **split_input, t_fill *var);
@@ -95,4 +105,14 @@ void		ft_pwd(void);
 char		**env_copy(char **env);
 int			exec_builtin(char **argv, char **env);
 void		ft_export(char *argv, char **env);
-#endif
+
+/*parser_fd.c*/
+int			take_fd(t_command *b);
+
+/*parser_quotes.c*/
+void		expand(t_command *b, char **envp);
+char		*search_env(char *var, char **envp);
+char		*expand_text(char *cmd, char **envp);
+char		*remove_quote(char *cmd);
+char		*expand_quotes(char *cmd, char **envp);
+#endif 
