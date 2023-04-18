@@ -5,14 +5,16 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_command	*a;
-	int			i;
-	int			j;
+	// int			i;
+	// int			j;
 
+	char **env = env_copy(envp);
+	char **va_export = env_copy(envp);
 	(void)argc;
 	(void)argv;
 	while (1)
 	{
-		i = 0;
+		// i = 0;
 		input = readline("> ");
 		add_history(input);
 		if (input[0] == '\0')
@@ -20,25 +22,25 @@ int	main(int argc, char **argv, char **envp)
 			free(input);
 			continue ;
 		}
-		a = parser(input, envp);
+		a = parser(input, env);
 		if (a == NULL)
 			continue ;
 		free(input);
-		j = 0;
-		while (!a[j].last)
-		{
-			printf("Comando %d\n", j);
-			i = 0;
-			while (a[j].argv && a[j].argv[i])
-			{
-				printf("%s\n", a[j].argv[i]);
-				i++;
-			}
-			j++;
-		}
-		executor(a, envp);
+		// j = 0;
+		// while (!a[j].last)
+		// {
+		// 	printf("Comando %d\n", j);
+		// 	i = 0;
+		// 	while (a[j].argv && a[j].argv[i])
+		// 	{
+		// 		printf("%s\n", a[j].argv[i]);
+		// 		i++;
+		// 	}
+		// 	j++;
+		// }
+		executor(a, &env, &va_export);
 		ft_free_struct(a);
-		// system("leaks minishell");
+		system("leaks minishell");
 	}
 }
 

@@ -12,6 +12,7 @@ char	**env_copy(char **env)
 	i = -1;
 	while (env[++i])
 		env_cp[i] = ft_strdup(env[i]);
+	env_cp[i] = NULL;
 	return (env_cp);
 }
 
@@ -35,6 +36,8 @@ char	**add_export(char ***envp, char *var_export)
 	while ((*envp)[++i])
 		env_cp[i] = ft_strdup((*envp)[i]);
 	env_cp[i] = var_export;
+	i++;
+	env_cp[i] = NULL;
 	i = -1;
 	while ((*envp)[++i])
 		free((*envp)[i]);
@@ -52,7 +55,7 @@ void	ft_export(char *argv, char ***envp, char ***var_export)
 	while (argv[++i] && (ft_isalnum(argv[i]) || ft_issame(argv[i], "?_"))
 		&& argv[i] != '=')
 		i++;
-	if (argv[i] == '=')
+	if (argv[i] && argv[i] == '=')
 		*envp = add_export(envp, argv);
 	*var_export = add_export(var_export, argv);
 }

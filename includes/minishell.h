@@ -12,9 +12,9 @@
 # include <sys/ioctl.h>
 # include <sys/wait.h>
 
-typedef struct s_cmd_table {
-	int		n_cmds;
-}			t_cmd_table;
+// typedef struct s_cmd_table {
+// 	int		n_cmds;
+// }			t_cmd_table;
 
 typedef struct s_command {
 	char		**argv;
@@ -109,8 +109,6 @@ char		**env_copy(char **env);
 int			exec_builtin(char **argv, char ***env, char ***var_export);
 void		ft_export(char *argv, char ***env, char ***var_export);
 char		**add_export(char ***envp, char *var_export);
-int			exec_builtin(char **argv, char **env);
-void		ft_export(char *argv, char **env);
 
 /*parser_fd.c*/
 int			take_fd(t_command *b);
