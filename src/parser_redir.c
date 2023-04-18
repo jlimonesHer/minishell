@@ -28,16 +28,16 @@ void	count_redir(char	**split_input, t_fill *var, t_command *b)
 
 void	create_infile(t_command *b, char **split_input, t_fill *var)
 {
-	b[var->cmd].infile[var->num_r_in] = split_input[var->i + 1];
-	printf("este es el infile %s\n", b[var->cmd].infile[var->num_r_in]);
+	b[var->cmd].infile[var->num_r_in] = ft_strdup(split_input[var->i + 1]);
+	// printf("este es el infile %s\n", b[var->cmd].infile[var->num_r_in]);
 	var->num_r_in += 1;
 	var->i += 2;
 }
 
 void	create_outfile(t_command *b, char **split_input, t_fill *var)
 {
-	b[var->cmd].outfile[var->num_r_out] = split_input[var->i + 1];
-	printf("este es el outfile %s\n", b[var->cmd].outfile[var->num_r_out]);
+	b[var->cmd].outfile[var->num_r_out] = ft_strdup(split_input[var->i + 1]);
+	// printf("este es el outfile %s\n", b[var->cmd].outfile[var->num_r_out]);
 	if (split_input[var->i][1])
 		b[var->cmd].double_out[var->num_r_out] = 1;
 	else

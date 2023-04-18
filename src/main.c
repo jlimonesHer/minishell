@@ -1,24 +1,62 @@
 #include "../includes/minishell.h"
 #include <sys/stat.h>
 
-int main(int ac, char **av, char **env)
+int	main(int argc, char **argv, char **envp)
 {
-	char			*input;
-	t_command		*a;
-	char			**envp;
-	char			**var_export;
+	char		*input;
+	t_command	*a;
+	int			i;
+	int			j;
 
-	envp = env_copy(env);
-	var_export = env_copy(env);
-	if (ac == 1 && av[0][0])
+	(void)argc;
+	(void)argv;
+	while (1)
 	{
-		while (1)
+		i = 0;
+		input = readline("> ");
+		add_history(input);
+		if (input[0] == '\0')
 		{
-			//var_export = add_export(envp, var_export);
-			input = readline("minishell> ");
-			add_history(input);
-			a = parser(input);
-			executor(a, &envp, &var_export);
+			free(input);
+			continue ;
 		}
+		a = parser(input, envp);
+		if (a == NULL)
+			continue ;
+		free(input);
+		j = 0;
+		while (!a[j].last)
+		{
+			printf("Comando %d\n", j);
+			i = 0;
+			while (a[j].argv && a[j].argv[i])
+			{
+				printf("%s\n", a[j].argv[i]);
+				i++;
+			}
+			j++;
+		}
+		executor(a, envp);
+		ft_free_struct(a);
+		// system("leaks minishell");
 	}
+}
+
+void	ft_free_struct(t_command	*a)
+{
+	int	i;
+
+	i = 0;
+	while (a[i].last != 1)
+	{
+		ft_freewords(-1, a[i].argv);
+		if (a[i].infile)
+			ft_freewords(-1, a[i].infile);
+		if (a[i].outfile)
+			ft_freewords(-1, a[i].outfile);
+		if (a[i].double_out)
+			free(a[i].double_out);
+		i++;
+	}
+	free(a);
 }
