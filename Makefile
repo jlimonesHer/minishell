@@ -1,7 +1,7 @@
 NAME = minishell
 LIBFT = libft/libft.a -lreadline
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g3
 SRC = 	src/main.c \
 	 	src/utils.c \
 		src/lexer.c \

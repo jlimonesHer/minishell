@@ -28,13 +28,13 @@ char	**add_export(char ***envp, char *var_export)
 	int		i;
 
 	i = 0;
-	while (envp[i])
+	while ((*envp)[i])
 		i++;
 	env_cp = ft_calloc(sizeof(char *), (i + 2));
 	i = -1;
-	while (envp[++i])
+	while ((*envp)[++i])
 		env_cp[i] = ft_strdup((*envp)[i]);
-	env_cp[i - 1] = var_export;
+	env_cp[i] = var_export;
 	i = -1;
 	while ((*envp)[++i])
 		free((*envp)[i]);
@@ -45,15 +45,13 @@ char	**add_export(char ***envp, char *var_export)
 void	ft_export(char *argv, char ***envp, char ***var_export)
 {
 	int		i;
-	char	key[100];
 
 	i = -1;
 	if (!argv)
 		return (ft_env(*var_export));
 	while (argv[++i] && (ft_isalnum(argv[i]) || ft_issame(argv[i], "?_"))
 		&& argv[i] != '=')
-		key[i] = argv[i];
-	key[i] = '\0';
+		i++;
 	if (argv[i] == '=')
 		*envp = add_export(envp, argv);
 	*var_export = add_export(var_export, argv);
