@@ -27,11 +27,16 @@ int	main(int argc, char **argv, char **envp)
 		j = 0;
 		while (!a[j].last)
 		{
-			input = readline("minishell> ");
-			add_history(input);
-			a = parser(input);
-			executor(a, envp);
+			printf("Comando %d\n", j);
+			i = 0;
+			while (a[j].argv && a[j].argv[i])
+			{
+				printf("%s\n", a[j].argv[i]);
+				i++;
+			}
+			j++;
 		}
+		executor(a, envp);
 		ft_free_struct(a);
 		// system("leaks minishell");
 	}

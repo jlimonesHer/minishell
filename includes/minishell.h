@@ -12,6 +12,10 @@
 # include <sys/ioctl.h>
 # include <sys/wait.h>
 
+typedef struct s_cmd_table {
+	int		n_cmds;
+}			t_cmd_table;
+
 typedef struct s_command {
 	char		**argv;
 	char		**infile;
@@ -92,8 +96,6 @@ void		create_cmd(t_command *b, char	**split_input, t_fill *var);
 void		count_redir(char	**split_input, t_fill *var, t_command *b);
 void		create_infile(t_command *b, char **split_input, t_fill *var);
 void		create_outfile(t_command *b, char **split_input, t_fill *var);
-void		take_fd(t_command *b);
-void		expand_quotes(t_command *b);
 
 /*path_cmd.c*/
 char		*search_path(char **envp, char *cmd);

@@ -3,7 +3,7 @@
 t_command	*parser(char *input, char **envp)
 {
 	t_command	*b;
-	int			n_cmds;
+	t_cmd_table	count;
 	char		**split_input;
 
 	split_input = lexer(input);
