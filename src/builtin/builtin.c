@@ -79,7 +79,7 @@ int	exec_builtin(char **argv, char ***envp, char ***var_export)
 	else if (!ft_strncmp(argv[0], "export", 7))
 		ft_export(argv[1], envp, var_export);
 	else if (!ft_strncmp(argv[0], "unset", 6))
-		printf("unset\n");
+		*envp = ft_unset(argv[1], envp);
 	else if (!ft_strncmp(argv[0], "env", 4))
 		ft_env(*envp);
 	else if (!ft_strncmp(argv[0], "exit", 5))

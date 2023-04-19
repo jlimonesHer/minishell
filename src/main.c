@@ -1,6 +1,8 @@
 #include "../includes/minishell.h"
 #include <sys/stat.h>
 
+void	free_env(char **env);
+
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
@@ -43,11 +45,22 @@ int	main(int argc, char **argv, char **envp)
 		executor(a, &env, &va_export);
 		tmp = env_copy(env);
 		env = tmp;
+		//free(tmp);
 		tmp2 = env_copy(va_export);
 		va_export = tmp2;
+		//free(tmp2);
 		ft_free_struct(a);
-		system("leaks minishell");
+		//system("leaks minishell");
 	}
+}
+
+void	free_env(char **env)
+{
+	int		i;
+
+	i = -1;
+	while (env[++i])
+		free(env[i]);
 }
 
 void	ft_free_struct(t_command	*a)
