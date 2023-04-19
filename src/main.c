@@ -7,7 +7,8 @@ int	main(int argc, char **argv, char **envp)
 	t_command	*a;
 	// int			i;
 	// int			j;
-
+	char	**tmp;
+	char	**tmp2;
 	char **env = env_copy(envp);
 	char **va_export = env_copy(envp);
 	(void)argc;
@@ -16,12 +17,13 @@ int	main(int argc, char **argv, char **envp)
 	{
 		// i = 0;
 		input = readline("> ");
-		add_history(input);
 		if (input[0] == '\0')
 		{
 			free(input);
 			continue ;
 		}
+		else
+			add_history(input);
 		a = parser(input, env);
 		if (a == NULL)
 			continue ;
@@ -39,6 +41,10 @@ int	main(int argc, char **argv, char **envp)
 		// 	j++;
 		// }
 		executor(a, &env, &va_export);
+		tmp = env_copy(env);
+		env = tmp;
+		tmp2 = env_copy(va_export);
+		va_export = tmp2;
 		ft_free_struct(a);
 		system("leaks minishell");
 	}

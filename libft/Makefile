@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jlimones <jlimones@student.42malaga.com    +#+  +:+       +#+         #
+#    By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/22 12:35:12 by jlimones          #+#    #+#              #
-#    Updated: 2023/02/09 09:05:37 by jlimones         ###   ########.fr        #
+#    Updated: 2023/04/19 13:21:14 by jlimones         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ SRC = ft_bzero.c \
 SRC_GNL = GNL/get_next_line_bonus.c \
 		  GNL/get_next_line_utils_bonus.c
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 NAME = libft.a
 

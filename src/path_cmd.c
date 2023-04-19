@@ -116,7 +116,7 @@ void	executor(t_command *cmds, char ***env, char ***var_export)
 {
 	t_fd_pipes	*t_pipe;
 
-	t_pipe = malloc(sizeof(t_fd_pipes));
+	t_pipe = ft_calloc(sizeof(t_fd_pipes), 2);
 	t_pipe->fdin = dup(0);
 	t_pipe->tmpin = dup(0);
 	t_pipe->tmpout = dup(1);

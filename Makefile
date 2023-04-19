@@ -1,6 +1,6 @@
 NAME = minishell
 LIBFT = libft/libft.a -lreadline
-CC = gcc
+CC = gcc -Wall -Werror -Wextra -g3
 FLAGS = -Wall -Werror -Wextra -g3
 SRC = 	src/main.c \
 	 	src/utils.c \
@@ -8,6 +8,7 @@ SRC = 	src/main.c \
 		src/split_shell.c \
 		src/path_cmd.c \
 		src/builtin/builtin.c \
+		src/builtin/ft_unset.c \
 		src/builtin/utils_builtin.c \
 		src/lexer_utils.c \
 		src/parser.c \
@@ -51,7 +52,7 @@ endif
 
 $(NAME): $(SRC) $(OBJ)
 	@make -C libft
-	@gcc -o $(NAME) $(FLAGS) $(SRC) $(LIB) $(LIBFT)
+	@gcc $(FLAGS) -Wall -Werror -Wextra -g3 -o $(NAME) $(SRC) $(LIB) $(LIBFT)
 	@printf "%b" "$(OK_COLOR)" "minishell compilado\n"
 
 skiperror:

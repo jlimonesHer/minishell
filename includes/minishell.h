@@ -104,11 +104,12 @@ void		executor(t_command *cmds, char ***env, char ***var_export);
 /*builtin.c*/
 void		ft_pwd(void);
 void		ft_env(char **envp);
-//void		ft_echo(char *argv);
 char		**env_copy(char **env);
 int			exec_builtin(char **argv, char ***env, char ***var_export);
 void		ft_export(char *argv, char ***env, char ***var_export);
-char		**add_export(char ***envp, char *var_export);
+void		add_export(char ***envp, char *var_export);
+void		get_va_env(char *key, char *argv, char ***env);
+char		**ft_unset(char *argv, char ***env);
 
 /*parser_fd.c*/
 int			take_fd(t_command *b);
