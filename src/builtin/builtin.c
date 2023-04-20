@@ -18,6 +18,8 @@ void	ft_echo(char **argv)
 	new_line = 1;
 	i = -1;
 	j = 0;
+	if (!argv[1])
+		return ((void)printf("\n"));
 	if (!ft_strncmp(argv[1], "-n", 2))
 	{
 		new_line = 0;
@@ -26,9 +28,7 @@ void	ft_echo(char **argv)
 	while (argv[++j])
 	{
 		while (argv[j][++i])
-		{
 			printf("%c", argv[j][i]);
-		}
 		printf(" ");
 		i = -1;
 	}
@@ -36,7 +36,24 @@ void	ft_echo(char **argv)
 		printf("\n");
 }
 
-static	void	ft_cd(char **argv)
+static void	path_pwd_old(char *path, char ***env)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while ((*env)[i] && ft_strncmp((*env)[i], "PWD=", 4))
+		i++;
+	j = 0;
+	while ((*env)[j] && ft_strncmp((*env)[j], "OLDPWD=", 7))
+		j++;
+	free((*env)[j]);
+	(*env)[j] = ft_strjoin("OLDPWD=", getenv("PWD"));
+	free((*env)[i]);
+	(*env)[i] = ft_strjoin("PWD=", path);
+}
+
+static	void	ft_cd(char **argv, char ***env, char ***va_export)
 {
 	char	buffer[256];
 	char	*path;
@@ -47,6 +64,11 @@ static	void	ft_cd(char **argv)
 		chdir(getenv("HOME"));
 		return ;
 	}
+	if (argv[1][0] == '-')
+	{
+		chdir(search_env("OLDPWD", *env));
+		return ;
+	}
 	path = ft_strjoin(buffer, "/");
 	path = ft_strjoin(path, argv[1]);
 	if (chdir(argv[1]) < 0)
@@ -54,15 +76,8 @@ static	void	ft_cd(char **argv)
 		ft_putstr_fd(("cd: no such file or directory: "), 2);
 		ft_putstr_fd(ft_strjoin(argv[1], "\n"), 2);
 	}
-}
-
-void	ft_env(char **envp)
-{
-	int		i;
-
-	i = -1;
-	while (envp[++i])
-		printf("%s\n", envp[i]);
+	path_pwd_old(path, env);
+	path_pwd_old(path, va_export);
 }
 
 int	exec_builtin(char **argv, char ***envp, char ***var_export)
@@ -75,7 +90,7 @@ int	exec_builtin(char **argv, char ***envp, char ***var_export)
 	else if (!ft_strncmp(argv[0], "echo", 5))
 		ft_echo(argv);
 	else if (!ft_strncmp(argv[0], "cd", 3))
-		ft_cd(argv);
+		ft_cd(argv, envp, var_export);
 	else if (!ft_strncmp(argv[0], "export", 7))
 		ft_export(argv[1], envp, var_export);
 	else if (!ft_strncmp(argv[0], "unset", 6))
