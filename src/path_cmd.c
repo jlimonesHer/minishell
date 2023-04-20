@@ -96,7 +96,12 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 			t_pipe->fdin = fds[0];
 		}
 		else
-			t_pipe->fdout = dup(t_pipe->tmpout);
+		{
+			if (cmds[i].fd_out)
+				t_pipe->fdout = cmds[i].fd_out;
+			else
+				t_pipe->fdout = dup(t_pipe->tmpout);
+		}
 		dup2(t_pipe->fdout, 1);
 		close(t_pipe->fdout);
 		pid = ft_create_child(&cmds[i], env, var_export);
@@ -117,7 +122,10 @@ void	executor(t_command *cmds, char ***env, char ***var_export)
 	t_fd_pipes	*t_pipe;
 
 	t_pipe = ft_calloc(sizeof(t_fd_pipes), 2);
-	t_pipe->fdin = dup(0);
+	if (cmds->n_cmds && cmds->fd_in)
+		t_pipe->fdin = cmds->fd_in;
+	else
+		t_pipe->fdin = dup(0);
 	t_pipe->tmpin = dup(0);
 	t_pipe->tmpout = dup(1);
 	loop_cmds(cmds, t_pipe, env, var_export);

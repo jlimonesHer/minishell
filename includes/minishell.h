@@ -120,4 +120,8 @@ char		*search_env(char *var, char **envp);
 char		*expand_text(char *cmd, char **envp);
 char		*remove_quote(char *cmd);
 char		*expand_quotes(char *cmd, char **envp);
+
+/*signals.c*/
+void		ft_signal(int sig);
+void			ctrl_c(char *input);
 #endif 

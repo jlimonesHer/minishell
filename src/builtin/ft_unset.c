@@ -48,12 +48,10 @@ char	**ft_unset(char *argv, char ***env)
 
 	i = 0;
 	j = 0;
-	printf("%i\n", search_key_env(argv, env));
 	if (search_key_env(argv, env))
 		return (*env);
 	while ((*env)[i])
 		i++;
-	printf("i = %i\n", i);
 	env_cp = ft_calloc(sizeof(char *), (i));
 	i = 0;
 	while ((*env)[i])
@@ -63,7 +61,6 @@ char	**ft_unset(char *argv, char ***env)
 			env_cp[j] = ft_strdup((*env)[i]);
 			j++;
 		}
-		printf("env = %s\n", env_cp[i]);
 		i++;
 	}
 	return (env_cp);

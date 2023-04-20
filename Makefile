@@ -1,7 +1,7 @@
 NAME = minishell
-LIBFT = libft/libft.a -lreadline
-CC = gcc -Wall -Werror -Wextra -g3
-FLAGS = -Wall -Werror -Wextra -g3
+LIBFT = libft/libft.a
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra -g3
 SRC = 	src/main.c \
 	 	src/utils.c \
 		src/lexer.c \
@@ -15,6 +15,11 @@ SRC = 	src/main.c \
 		src/parser_redir.c \
 		src/parser_quotes.c \
 		src/parser_fd.c \
+		src/signals/signals.c
+
+LDFLAGS="-L/System/Volumes/Data/sgoinfre/goinfre/Perso/jlimones/homebrew/opt/readline/lib"
+CPPFLAGS="-I/System/Volumes/Data/sgoinfre/goinfre/Perso/jlimones/homebrew/opt/readline/include"
+LIB= -lreadline
 
 AUTHOR = jlimones / abarriga
 DATE = 21/03/2023
@@ -50,9 +55,9 @@ endif
 	@printf "%b" "$(OBJ_COLOR)CC: 	$(WARN_COLOR)$(CC)\n\033[m"
 	@printf "%b" "$(OBJ_COLOR)Flags: 	$(WARN_COLOR)$(FLAGS)\n\033[m"
 
-$(NAME): $(SRC) $(OBJ)
+$(NAME): ${OBJ}
 	@make -C libft
-	@gcc $(FLAGS) -Wall -Werror -Wextra -g3 -o $(NAME) $(SRC) $(LIB) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB) $(LIBFT) $(LDFLAGS) $(CPPFLAGS)
 	@printf "%b" "$(OK_COLOR)" "minishell compilado\n"
 
 skiperror:

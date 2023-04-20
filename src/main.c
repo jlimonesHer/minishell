@@ -7,18 +7,18 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_command	*a;
-	// int			i;
-	// int			j;
-	char	**tmp;
-	char	**tmp2;
-	char **env = env_copy(envp);
-	char **va_export = env_copy(envp);
+	char		**env;
+	char		**va_export;
+
 	(void)argc;
 	(void)argv;
+	va_export = env_copy(envp);
+	env = env_copy(envp);
 	while (1)
 	{
-		// i = 0;
+		signal(SIGINT, ft_signal);
 		input = readline("> ");
+		ctrl_c(input);
 		if (input[0] == '\0')
 		{
 			free(input);
@@ -30,25 +30,9 @@ int	main(int argc, char **argv, char **envp)
 		if (a == NULL)
 			continue ;
 		free(input);
-		// j = 0;
-		// while (!a[j].last)
-		// {
-		// 	printf("Comando %d\n", j);
-		// 	i = 0;
-		// 	while (a[j].argv && a[j].argv[i])
-		// 	{
-		// 		printf("%s\n", a[j].argv[i]);
-		// 		i++;
-		// 	}
-		// 	j++;
-		// }
 		executor(a, &env, &va_export);
-		tmp = env_copy(env);
-		env = tmp;
-		//free(tmp);
-		tmp2 = env_copy(va_export);
-		va_export = tmp2;
-		//free(tmp2);
+		env = env_copy(env);
+		va_export = env_copy(va_export);
 		ft_free_struct(a);
 		//system("leaks minishell");
 	}
