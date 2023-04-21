@@ -59,8 +59,12 @@ void	ft_free_struct(t_command	*a)
 			ft_freewords(-1, a[i].infile);
 		if (a[i].outfile)
 			ft_freewords(-1, a[i].outfile);
+		if (a[i].delimeter)
+			ft_freewords(-1, a[i].delimeter);
 		if (a[i].double_out)
 			free(a[i].double_out);
+		if (a[i].double_in)
+			free(a[i].double_in);
 		i++;
 	}
 	free(a);

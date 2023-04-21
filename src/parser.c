@@ -16,6 +16,7 @@ t_command	*parser(char *input, char **envp)
 	if (!b)
 		return (perror("Error"), NULL);
 	fill_cmds(b, split_input);
+	create_delimiter(b);
 	if (take_fd(b))
 		return (NULL);
 	expand(b, envp);

@@ -20,6 +20,8 @@ typedef struct s_command {
 	char		**argv;
 	char		**infile;
 	int			fd_in;
+	int			*double_in;
+	char		**delimiter;
 	char		**outfile;
 	int			fd_out;
 	int			*double_out;
@@ -96,6 +98,7 @@ void		create_cmd(t_command *b, char	**split_input, t_fill *var);
 void		count_redir(char	**split_input, t_fill *var, t_command *b);
 void		create_infile(t_command *b, char **split_input, t_fill *var);
 void		create_outfile(t_command *b, char **split_input, t_fill *var);
+void		create_delimiter(t_command *b);
 
 /*path_cmd.c*/
 char		*search_path(char **envp, char *cmd);
@@ -113,6 +116,8 @@ char		**ft_unset(char *argv, char ***env);
 
 /*parser_fd.c*/
 int			take_fd(t_command *b);
+void		open_outfile(t_command *b, int i);
+int			open_infile(t_command *b, int i, int j);
 
 /*parser_quotes.c*/
 void		expand(t_command *b, char **envp);
@@ -123,5 +128,5 @@ char		*expand_quotes(char *cmd, char **envp);
 
 /*signals.c*/
 void		ft_signal(int sig);
-void			ctrl_c(char *input);
-#endif 
+void		ctrl_c(char *input);
+#endif
