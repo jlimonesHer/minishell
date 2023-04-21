@@ -63,10 +63,11 @@ typedef struct s_expand {
 }				t_expand;
 
 /* utils.c */
-void		ft_exit(char *cmd);
+void		ft_exit(t_command *cmds);
 void		ft_free_struct(t_command	*a);
 void		free_quotes(t_expand *e);
 void		free_first_quotes(t_expand *e);
+void		free_env(char **env);
 
 /*lexer.c*/
 int			check_input_quotes(char *input);
@@ -104,12 +105,14 @@ void		executor(t_command *cmds, char ***env, char ***var_export);
 /*builtin.c*/
 void		ft_pwd(void);
 void		ft_env(char **envp);
-char		**env_copy(char **env);
+char		**env_copy1(char **env);
+char		**env_copy2(char **env);
 int			exec_builtin(char **argv, char ***env, char ***var_export);
 void		ft_export(char *argv, char ***env, char ***var_export);
 void		add_export(char ***envp, char *var_export);
 void		get_va_env(char *key, char *argv, char ***env);
 char		**ft_unset(char *argv, char ***env);
+void		ft_change_va_report(char ***env, char ***va_export, int b);
 
 /*parser_fd.c*/
 int			take_fd(t_command *b);
@@ -123,5 +126,5 @@ char		*expand_quotes(char *cmd, char **envp);
 
 /*signals.c*/
 void		ft_signal(int sig);
-void			ctrl_c(char *input);
+int			ctrl_c(char *input);
 #endif 

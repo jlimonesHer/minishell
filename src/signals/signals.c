@@ -1,12 +1,13 @@
 #include "../../includes/minishell.h"
 
-void	ctrl_c(char *input)
+int	ctrl_c(char *input)
 {
 	if (!input)
 	{
 		ft_putstr_fd("exit\n", 2);
-		exit(0);
+		return (0);
 	}
+	return (1);
 }
 
 void	ft_signal(int sig)
