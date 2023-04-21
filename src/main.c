@@ -39,9 +39,9 @@ int	main(int argc, char **argv, char **envp)
 		ft_free_struct(a);
 		}
 	}
-	//ft_freewords(-1, env);
-	ft_freewords(-1, va_export);
-		system("leaks minishell");
+	// free_env(env);
+	// free_env(va_export);
+	system("leaks minishell");
 	printf("llega\n");
 	return (0);
 }

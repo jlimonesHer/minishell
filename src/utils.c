@@ -7,8 +7,6 @@
 void	ft_exit(t_command *cmds)
 {
 	ft_free_struct(cmds);
-	// free_env(*env);
-	// free_env(*va_export);
 }
 
 void	free_quotes(t_expand *e)
@@ -21,7 +19,6 @@ void	free_quotes(t_expand *e)
 	e->env = NULL;
 	e->line = NULL;
 	e->sub = NULL;
-
 }
 
 void	free_first_quotes(t_expand *e)
@@ -37,15 +34,15 @@ void	ft_change_va_report(char ***env, char ***va_export, int b)
 	if (b == 0)
 	{
 		free((*env)[0]);
-		(*env)[0] = "?=0";
+		(*env)[0] = ft_strdup("?=0");
 		free((*va_export)[0]);
-		(*va_export)[0] = "?=0";
+		(*va_export)[0] = ft_strdup("?=0");
 	}
 	else if (b == 1)
 	{
 		free((*env)[0]);
-		(*env)[0] = "?=1";
+		(*env)[0] = ft_strdup("?=1");
 		free((*va_export)[0]);
-		(*va_export)[0] = "?=1";
+		(*va_export)[0] = ft_strdup("?=1");
 	}
 }

@@ -57,7 +57,7 @@ endif
 
 $(NAME): ${OBJ}
 	@make -C libft
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB) $(LIBFT) $(LDFLAGS) $(CPPFLAGS)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB) $(LIBFT) $(LDFLAGS) $(CPPFLAGS)
 	@printf "%b" "$(OK_COLOR)" "minishell compilado\n"
 
 skiperror:
