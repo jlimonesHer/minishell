@@ -127,4 +127,5 @@ char		*expand_quotes(char *cmd, char **envp);
 /*signals.c*/
 void		ft_signal(int sig);
 int			ctrl_c(char *input);
+void	ft_free_struct_pipe(t_fd_pipes	*pipe);
 #endif 

@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char **envp)
 	env = env_copy2(envp);
 	while (si)
 	{
-		signal(SIGINT, ft_signal);
+		//signal(SIGINT, ft_signal);
 		input = readline("> ");
 		if (!input)
 			si = ctrl_c(input);
@@ -38,11 +38,8 @@ int	main(int argc, char **argv, char **envp)
 		va_export = env_copy1(va_export);
 		ft_free_struct(a);
 		}
-	}
-	// free_env(env);
-	// free_env(va_export);
 	system("leaks minishell");
-	printf("llega\n");
+	}
 	return (0);
 }
 
@@ -73,3 +70,10 @@ void	ft_free_struct(t_command	*a)
 	}
 	free(a);
 }
+// void	ft_free_struct_pipe(t_fd_pipes	*pipe)
+// {
+// 	free(pipe->fdin);
+// 	free(pipe->fdout);
+// 	free(pipe->tmpin);
+// 	free(pipe->tmpout);
+// }

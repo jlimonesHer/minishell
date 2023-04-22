@@ -10,7 +10,6 @@ char	**env_copy1(char **env)
 		i++;
 	env_cp = ft_calloc(sizeof(char *), (i + 1));
 	i = 0;
-		printf("p = %p   cont = %s\n", env[0], env[0]);
 	while (env[i])
 	{
 		env_cp[i] = ft_strdup(env[i]);
@@ -29,17 +28,15 @@ char	**env_copy1(char **env)
 char	**env_copy2(char **env)
 {
 	char	**env_cp;
-	char	*env_r;
 	int		i;
 	int		j;
 
-	env_r = ft_strdup("?=1");
 	i = 0;
 	j = 0;
 	while (env[i])
 		i++;
 	env_cp = ft_calloc(sizeof(char *), (i + 2));
-	env_cp[0] = ft_strdup(env_r);
+	env_cp[0] = ft_strdup("?=0");
 	i = 1;
 	while (env[j])
 	{

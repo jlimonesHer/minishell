@@ -54,6 +54,7 @@ static int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 
 	if (exec_builtin(cmds->argv, env, var_export))
 		return (-1);
+
 	pid = fork();
 	if (pid == 0)
 	{
@@ -134,4 +135,5 @@ void	executor(t_command *cmds, char ***env, char ***var_export)
 	dup2(t_pipe->tmpout, 1);
 	close(t_pipe->tmpin);
 	close(t_pipe->tmpout);
+	free(t_pipe);
 }
