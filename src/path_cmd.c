@@ -76,7 +76,7 @@ static int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
  * @param env variables globales
  */
 static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
-	char ***var_export)
+	char ***va_export)
 {
 	int	i;
 	int	pid;
@@ -104,9 +104,10 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 		}
 		dup2(t_pipe->fdout, 1);
 		close(t_pipe->fdout);
-		pid = ft_create_child(&cmds[i], env, var_export);
+		pid = ft_create_child(&cmds[i], env, va_export);
 		if (i == cmds->n_cmds - 1)
 			waitpid(pid, &status, 0);
+		ft_change_va_report(env, va_export, WEXITSTATUS(status));
 	}
 }
 
@@ -133,4 +134,5 @@ void	executor(t_command *cmds, char ***env, char ***var_export)
 	dup2(t_pipe->tmpout, 1);
 	close(t_pipe->tmpin);
 	close(t_pipe->tmpout);
+	free(t_pipe);
 }

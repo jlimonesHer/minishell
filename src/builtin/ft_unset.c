@@ -29,12 +29,12 @@ static int	search_key_env(char *argv, char ***env)
 	int		i;
 	int		t_f;
 
-	t_f = 1;
+	t_f = 0;
 	i = 0;
 	while ((*env)[i])
 	{
 		if (!ft_strncmp(argv, (*env)[i], ft_strlen(argv)))
-			t_f = 0;
+			t_f = 1;
 		i++;
 	}
 	return (t_f);
@@ -48,7 +48,7 @@ char	**ft_unset(char *argv, char ***env)
 
 	i = 0;
 	j = 0;
-	if (search_key_env(argv, env))
+	if (!search_key_env(argv, env))
 		return (*env);
 	while ((*env)[i])
 		i++;

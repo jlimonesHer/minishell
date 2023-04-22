@@ -1,16 +1,13 @@
 #include "../../includes/minishell.h"
 
-char	**env_copy(char **env)
+char	**env_copy1(char **env)
 {
 	char	**env_cp;
 	int		i;
 
 	i = 0;
 	while (env[i])
-	{
-		//printf("env[%d]: %s\n", i, env[i]);
 		i++;
-	}
 	env_cp = ft_calloc(sizeof(char *), (i + 1));
 	i = 0;
 	while (env[i])
@@ -18,16 +15,37 @@ char	**env_copy(char **env)
 		env_cp[i] = ft_strdup(env[i]);
 		i++;
 	}
-	env_cp[i] = NULL;
+	ft_freewords(-1, env);
 	return (env_cp);
 }
 
-// static	void	ft_error_export(char *argv)
-// {
-// 	ft_putstr_fd("export: ", 2);
-// 	ft_putstr_fd(argv, 2);
-// 	ft_putstr_fd(": not a valid identifier\n", 2);
-// }
+/**
+ * @brief 
+ * 
+ * @param env 
+ * @return char** 
+ */
+char	**env_copy2(char **env)
+{
+	char	**env_cp;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (env[i])
+		i++;
+	env_cp = ft_calloc(sizeof(char *), (i + 2));
+	env_cp[0] = ft_strdup("?=0");
+	i = 1;
+	while (env[j])
+	{
+		env_cp[i] = ft_strdup(env[j]);
+		j++;
+		i++;
+	}
+	return (env_cp);
+}
 
 void	add_export(char ***envp, char *argv)
 {
@@ -43,11 +61,10 @@ void	add_export(char ***envp, char *argv)
 			env_cp[i] = ft_strdup((*envp)[i]);
 	env_cp[i] = argv;
 	i++;
-	//env_cp[i] = NULL;
 	i = -1;
-	while ((*envp)[++i])
-		free((*envp)[i]);
-	free(*envp);
+	// while ((*envp)[++i])
+	// 	free((*envp)[i]);
+	// free(*envp);
 	*envp = env_cp;
 }
 

@@ -1,24 +1,27 @@
 #include "../includes/minishell.h"
 #include <sys/stat.h>
 
-void	free_env(char **env);
-
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_command	*a;
 	char		**env;
 	char		**va_export;
+	int si;
 
+	si = 1;
 	(void)argc;
 	(void)argv;
-	va_export = env_copy(envp);
-	env = env_copy(envp);
-	while (1)
+	va_export = env_copy2(envp);
+	env = env_copy2(envp);
+	while (si)
 	{
-		signal(SIGINT, ft_signal);
+		//signal(SIGINT, ft_signal);
 		input = readline("> ");
-		ctrl_c(input);
+		if (!input)
+			si = ctrl_c(input);
+		else
+		{
 		if (input[0] == '\0')
 		{
 			free(input);
@@ -31,11 +34,13 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		free(input);
 		executor(a, &env, &va_export);
-		env = env_copy(env);
-		va_export = env_copy(va_export);
+		env = env_copy1(env);
+		va_export = env_copy1(va_export);
 		ft_free_struct(a);
-		//system("leaks minishell");
+		}
+	//system("leaks minishell");
 	}
+	return (0);
 }
 
 void	free_env(char **env)
@@ -59,8 +64,8 @@ void	ft_free_struct(t_command	*a)
 			ft_freewords(-1, a[i].infile);
 		if (a[i].outfile)
 			ft_freewords(-1, a[i].outfile);
-		if (a[i].delimeter)
-			ft_freewords(-1, a[i].delimeter);
+		if (a[i].delimiter)
+			ft_freewords(-1, a[i].delimiter);
 		if (a[i].double_out)
 			free(a[i].double_out);
 		if (a[i].double_in)
@@ -69,3 +74,10 @@ void	ft_free_struct(t_command	*a)
 	}
 	free(a);
 }
+// void	ft_free_struct_pipe(t_fd_pipes	*pipe)
+// {
+// 	free(pipe->fdin);
+// 	free(pipe->fdout);
+// 	free(pipe->tmpin);
+// 	free(pipe->tmpout);
+// }
