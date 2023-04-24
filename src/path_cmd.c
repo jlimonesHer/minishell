@@ -39,6 +39,26 @@ char	*search_path(char **env, char *cmd)
 	return (NULL);
 }
 
+int	is_delim(t_command *cmds)
+{
+	int		fdpipe[2];
+	char	*line;
+
+	if (pipe(fdpipe) < 0)
+		return (-1);
+	line = readline("> ");
+	while (ft_strncmp(line, *cmds->infile, ft_strlen(line) + 1))
+	{
+		ft_putstr_fd(line, fdpipe[1]);
+		ft_putstr_fd("\n", fdpipe[1]);
+		free(line);
+		line = readline("> ");
+	}
+	free(line);
+	close(fdpipe[1]);
+	return (fdpipe[0]);
+}
+
 /**
  * @brief 
  * 
@@ -90,10 +110,12 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 		close(t_pipe->fdin);
 		if (i != cmds->n_cmds - 1)
 		{
-			if (pipe(fds) == -1)
-				return (perror("Error:"));
 			t_pipe->fdout = fds[1];
 			t_pipe->fdin = fds[0];
+		}
+		else if (*cmds->double_in == 1)
+		{
+			t_pipe->fdin = is_delim(cmds);
 		}
 		else
 		{
@@ -102,6 +124,8 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 			else
 				t_pipe->fdout = dup(t_pipe->tmpout);
 		}
+		if (pipe(fds) < 0)
+			return (perror("Error:"));
 		dup2(t_pipe->fdout, 1);
 		close(t_pipe->fdout);
 		pid = ft_create_child(&cmds[i], env, va_export);

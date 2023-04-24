@@ -8,6 +8,7 @@ int	main(int argc, char **argv, char **envp)
 	char		**env;
 	char		**va_export;
 	int si;
+	//int i = -1;
 
 	si = 1;
 	(void)argc;
@@ -30,6 +31,7 @@ int	main(int argc, char **argv, char **envp)
 		else
 			add_history(input);
 		a = parser(input, env);
+		printf("ft = %i\n", *a->double_in);
 		if (a == NULL)
 			continue ;
 		free(input);
