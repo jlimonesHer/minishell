@@ -8,7 +8,6 @@ int	main(int argc, char **argv, char **envp)
 	char		**env;
 	char		**va_export;
 	int si;
-	//int i = -1;
 
 	si = 1;
 	(void)argc;
@@ -31,14 +30,13 @@ int	main(int argc, char **argv, char **envp)
 		else
 			add_history(input);
 		a = parser(input, env);
-		printf("ft = %i\n", *a->double_in);
 		if (a == NULL)
 			continue ;
 		free(input);
 		executor(a, &env, &va_export);
 		env = env_copy1(env);
 		va_export = env_copy1(va_export);
-		ft_free_struct(a);
+		//ft_free_struct(a);
 		}
 	//system("leaks minishell");
 	}
@@ -67,7 +65,7 @@ void	ft_free_struct(t_command	*a)
 		if (a[i].outfile)
 			ft_freewords(-1, a[i].outfile);
 		if (a[i].delimiter)
-			ft_freewords(-1, a[i].delimiter);
+			free(a[i].delimiter);
 		if (a[i].double_out)
 			free(a[i].double_out);
 		if (a[i].double_in)

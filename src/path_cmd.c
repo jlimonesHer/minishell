@@ -46,13 +46,13 @@ int	is_delim(t_command *cmds)
 
 	if (pipe(fdpipe) < 0)
 		return (-1);
-	line = readline("> ");
-	while (ft_strncmp(line, *cmds->infile, ft_strlen(line) + 1))
+	line = readline("heredoc> ");
+	while (ft_strncmp(line, *cmds->delimiter, ft_strlen(line) + 1))
 	{
 		ft_putstr_fd(line, fdpipe[1]);
 		ft_putstr_fd("\n", fdpipe[1]);
 		free(line);
-		line = readline("> ");
+		line = readline("heredoc> ");
 	}
 	free(line);
 	close(fdpipe[1]);
@@ -75,7 +75,7 @@ static int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 	if (exec_builtin(cmds->argv, env, var_export))
 		return (-1);
 	pid = fork();
-	if (pid == 0)
+	if (pid == 0 && *cmds->double_out != 1)
 	{
 		shell = search_path(*env, cmds->argv[0]);
 		if (shell == NULL)
@@ -104,18 +104,18 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 	int	fds[2];
 
 	i = -1;
+	if (pipe(fds) < 0)
+		return (perror("Error:"));
 	while (++i < cmds->n_cmds)
 	{
+		if (cmds->delimiter)
+			t_pipe->fdin = is_delim(cmds);
 		dup2(t_pipe->fdin, 0);
 		close(t_pipe->fdin);
 		if (i != cmds->n_cmds - 1)
 		{
 			t_pipe->fdout = fds[1];
 			t_pipe->fdin = fds[0];
-		}
-		else if (*cmds->double_in == 1)
-		{
-			t_pipe->fdin = is_delim(cmds);
 		}
 		else
 		{
@@ -124,8 +124,6 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 			else
 				t_pipe->fdout = dup(t_pipe->tmpout);
 		}
-		if (pipe(fds) < 0)
-			return (perror("Error:"));
 		dup2(t_pipe->fdout, 1);
 		close(t_pipe->fdout);
 		pid = ft_create_child(&cmds[i], env, va_export);
@@ -147,12 +145,12 @@ void	executor(t_command *cmds, char ***env, char ***var_export)
 	t_fd_pipes	*t_pipe;
 
 	t_pipe = ft_calloc(sizeof(t_fd_pipes), 2);
+	t_pipe->tmpin = dup(0);
+	t_pipe->tmpout = dup(1);
 	if (cmds->n_cmds && cmds->fd_in)
 		t_pipe->fdin = cmds->fd_in;
 	else
 		t_pipe->fdin = dup(0);
-	t_pipe->tmpin = dup(0);
-	t_pipe->tmpout = dup(1);
 	loop_cmds(cmds, t_pipe, env, var_export);
 	dup2(t_pipe->tmpin, 0);
 	dup2(t_pipe->tmpout, 1);

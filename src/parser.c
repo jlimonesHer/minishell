@@ -19,7 +19,9 @@ t_command	*parser(char *input, char **envp)
 	create_delimiter(b);
 	if (take_fd(b))
 		return (NULL);
+	printf("pasa take_fd\n");
 	expand(b, envp);
+	printf("pasa expand\n");
 	ft_freewords(-1, split_input);
 	return (b);
 }

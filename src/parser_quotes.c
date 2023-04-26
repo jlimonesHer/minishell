@@ -15,9 +15,13 @@ void	expand(t_command *b, char **envp)
 				b->argv[e.i] = remove_quote(&b->argv[e.i][1]);
 			else
 				b->argv[e.i] = expand_text(b->argv[e.i], envp);
+		printf("i: %d\n", e.i);
+		printf("Imprime last\n");
 		}
 		b++;
+		printf("last: %d\n", b->last);
 	}
+	printf("ACABA\n");
 }
 
 char	*remove_quote(char *cmd)
@@ -37,6 +41,7 @@ char	*expand_text(char *cmd, char **envp)
 		if (cmd == NULL)
 			return (NULL);
 	}
+	printf("cmd: %s\n", cmd);
 	return (cmd);
 }
 

@@ -68,6 +68,8 @@ void	create_delimiter(t_command *b)
 			count += b->double_in[i];
 		if (count > 0)
 			b[cmd].delimiter = ft_calloc(count + 1, sizeof(char *));
+		else
+			b[cmd].delimiter = NULL;
 		cmd++;
 	}
 }
