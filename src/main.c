@@ -27,19 +27,6 @@ int	main(int argc, char **argv, char **envp)
 		else
 			add_history(input);
 		a = parser(input, env);
-		int j = 0;
-		int i;
-		while (!a[j].last)
-		{
-			printf("Comando %d\n", j);
-			i = 0;
-			while (a[j].argv && a[j].argv[i])
-			{
-				printf("%s\n", a[j].argv[i]);
-				i++;
-			}
-			j++;
-		}
 		if (a == NULL)
 			continue ;
 		free(input);

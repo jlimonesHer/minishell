@@ -24,16 +24,10 @@ void	count_redir(char	**split_input, t_fill *var, t_command *b)
 				j += 1;
 			i++;
 		}
-		if (var->c_in >= 0)
-		{
-			b[cmd].infile = ft_calloc(var->c_in + 1, sizeof(char *));
-			b[cmd].double_in = ft_calloc(var->c_in + 1, sizeof(int));
-		}
-		if (var->c_out >= 0)
-		{
-			b[cmd].outfile = ft_calloc(var->c_out + 1, sizeof(char *));
-			b[cmd].double_out = ft_calloc(var->c_out + 1, sizeof(int));
-		}
+		b[cmd].infile = ft_calloc(var->c_in + 1, sizeof(char *));
+		b[cmd].double_in = ft_calloc(var->c_in + 1, sizeof(int));
+		b[cmd].outfile = ft_calloc(var->c_out + 1, sizeof(char *));
+		b[cmd].double_out = ft_calloc(var->c_out + 1, sizeof(int));
 		b[cmd].argv = ft_calloc(sizeof(char *), j + 1);
 		if (split_input[i] && (ft_issame(split_input[i][0], "|")))
 		{
