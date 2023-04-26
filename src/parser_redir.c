@@ -3,30 +3,44 @@
 void	count_redir(char	**split_input, t_fill *var, t_command *b)
 {
 	int	i;
+	int	cmd;
+	int	j;
 
 	i = 0;
-	var->c_in = 0;
-	var->c_out = 0;
-	while (split_input[i] && !ft_issame(split_input[i][0], "|"))
+	cmd = 0;
+	while (split_input[i])
 	{
-		if (ft_issame(split_input[i][0], "<"))
-			var->c_in += 1;
-		else if (ft_issame(split_input[i][0], ">"))
-			var->c_out += 1;
-		i++;
+		
+		j = 0;
+		var->c_in = 0;
+		var->c_out = 0;
+		while (split_input[i] && !ft_issame(split_input[i][0], "|"))
+		{
+			if (ft_issame(split_input[i][0], "<"))
+				var->c_in += 1;
+			else if (ft_issame(split_input[i][0], ">"))
+				var->c_out += 1;
+			else 
+				j += 1;
+			i++;
+		}
+		if (var->c_in >= 0)
+		{
+			b[cmd].infile = ft_calloc(var->c_in + 1, sizeof(char *));
+			b[cmd].double_in = ft_calloc(var->c_in + 1, sizeof(int));
+		}
+		if (var->c_out >= 0)
+		{
+			b[cmd].outfile = ft_calloc(var->c_out + 1, sizeof(char *));
+			b[cmd].double_out = ft_calloc(var->c_out + 1, sizeof(int));
+		}
+		b[cmd].argv = ft_calloc(sizeof(char *), j + 1);
+		if (split_input[i] && (ft_issame(split_input[i][0], "|")))
+		{
+			i++;
+			cmd++;
+		}
 	}
-	if (var->c_in >= 0)
-	{
-		b[var->cmd].infile = ft_calloc(var->c_in + 1, sizeof(char *));
-		b[var->cmd].double_in = ft_calloc(var->c_in + 1, sizeof(int));
-	}
-	if (var->c_out >= 0)
-	{
-		b[var->cmd].outfile = ft_calloc(var->c_out + 1, sizeof(char *));
-		b[var->cmd].double_out = ft_calloc(var->c_out + 1, sizeof(int));
-	}
-	b[var->cmd].argv = ft_calloc(sizeof(char *),
-			i - (2 * (var->c_in + var->c_out)) + 1);
 }
 
 void	create_infile(t_command *b, char **split_input, t_fill *var)

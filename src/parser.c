@@ -30,12 +30,12 @@ void	fill_cmds(t_command *b, char **split_input)
 
 	var.cmd = 0;
 	var.i = 0;
+	count_redir(split_input, &var, b);
 	while (split_input[var.i])
 	{
 		var.j = 0;
 		var.num_r_in = 0;
 		var.num_r_out = 0;
-		count_redir(split_input, &var, b);
 		while (split_input[var.i] && !ft_issame(split_input[var.i][0], "|"))
 		{
 			if (ft_issame(split_input[var.i][0], "<"))
@@ -44,22 +44,7 @@ void	fill_cmds(t_command *b, char **split_input)
 				create_outfile(b, split_input, &var);
 			else
 				create_cmd(b, split_input, &var);
-
-			int i;
-			int j = 0;
-			while (!b[j].last)
-			{
-				printf("Comando %d\n", j);
-				i = 0;
-				while (b[j].argv && b[j].argv[i])
-				{
-					printf("%s\n", b[j].argv[i]);
-					i++;
-				}
-				j++;
-			}
 		}
-		// b[var.cmd].argv[var.j] = NULL;
 		if (split_input[var.i] && (ft_issame(split_input[var.i][0], "|")))
 		{
 			var.i++;
@@ -70,13 +55,7 @@ void	fill_cmds(t_command *b, char **split_input)
 
 void	create_cmd(t_command *b, char	**split_input, t_fill *var)
 {
-	// printf("entrada deb create_cmd = %s\n", b[var->cmd].argv[var->j]);
-	// printf("despues deb create_cmd = %s\n", split_input[var->i]);
 	b[var->cmd].argv[var->j++] = ft_strdup(split_input[var->i++]);
-	// printf("var %i \n", var->j);
-	// var->j = var->j + 1;
-	// var->i = var->i + 1;
-	// printf("create_cmd = %s\n", split_input[var->i - 1]);
 	b[var->cmd].argv[var->j] = NULL;
 }
 
