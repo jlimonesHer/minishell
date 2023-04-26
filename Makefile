@@ -6,7 +6,8 @@ SRC = 	src/main.c \
 	 	src/utils.c \
 		src/lexer.c \
 		src/split_shell.c \
-		src/path_cmd.c \
+		src/executor/path_cmd.c \
+		src/executor/executor.c \
 		src/builtin/builtin.c \
 		src/builtin/ft_unset.c \
 		src/builtin/utils_builtin.c \

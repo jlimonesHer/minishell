@@ -31,6 +31,7 @@ typedef struct s_fd_pipes
 	int		fdout;
 	int		tmpin;
 	int		tmpout;
+	int		i;
 }	t_fd_pipes;
 
 typedef struct s_fill {
@@ -112,6 +113,8 @@ void		add_export(char ***envp, char *var_export);
 void		get_va_env(char *key, char *argv, char ***env);
 char		**ft_unset(char *argv, char ***env);
 void		ft_change_va_report(char ***env, char ***va_export, int b);
+int			ft_create_child(t_command *cmds, char ***env, char ***var_export);
+int			is_delim(t_command *cmds);
 
 /*parser_fd.c*/
 int			take_fd(t_command *b);

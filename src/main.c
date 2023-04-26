@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char **envp)
 	env = env_copy2(envp);
 	while (si)
 	{
-		//signal(SIGINT, ft_signal);
+		signal(SIGINT, ft_signal);
 		input = readline("> ");
 		if (!input)
 			si = ctrl_c(input);

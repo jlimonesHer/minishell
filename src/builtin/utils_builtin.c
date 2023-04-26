@@ -62,9 +62,6 @@ void	add_export(char ***envp, char *argv)
 	env_cp[i] = argv;
 	i++;
 	i = -1;
-	// while ((*envp)[++i])
-	// 	free((*envp)[i]);
-	// free(*envp);
 	*envp = env_cp;
 }
 
