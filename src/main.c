@@ -27,6 +27,19 @@ int	main(int argc, char **argv, char **envp)
 		else
 			add_history(input);
 		a = parser(input, env);
+		int j = 0;
+		int i;
+		while (!a[j].last)
+		{
+			printf("Comando %d\n", j);
+			i = 0;
+			while (a[j].argv && a[j].argv[i])
+			{
+				printf("%s\n", a[j].argv[i]);
+				i++;
+			}
+			j++;
+		}
 		if (a == NULL)
 			continue ;
 		free(input);
@@ -59,8 +72,8 @@ void	ft_free_struct(t_command	*a)
 			ft_freewords(-1, a[i].infile);
 		if (a[i].outfile)
 			ft_freewords(-1, a[i].outfile);
-		if (a[i].delimeter)
-			ft_freewords(-1, a[i].delimeter);
+		if (a[i].delimiter)
+			ft_freewords(-1, a[i].delimiter);
 		if (a[i].double_out)
 			free(a[i].double_out);
 		if (a[i].double_in)

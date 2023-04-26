@@ -11,10 +11,10 @@ t_command	*parser(char *input, char **envp)
 		return (ft_putstr_fd("Error: invalid quotes\n", 2), NULL);
 	n_cmds = count_cmds(split_input);
 	b = ft_calloc(sizeof(t_command), (n_cmds + 1));
-	b->n_cmds = n_cmds;
-	last_cmd_table(b, b->n_cmds);
 	if (!b)
 		return (perror("Error"), NULL);
+	b->n_cmds = n_cmds;
+	last_cmd_table(b, b->n_cmds);
 	fill_cmds(b, split_input);
 	create_delimiter(b);
 	if (take_fd(b))
@@ -44,8 +44,23 @@ void	fill_cmds(t_command *b, char **split_input)
 				create_outfile(b, split_input, &var);
 			else
 				create_cmd(b, split_input, &var);
+
+			int i;
+			int j = 0;
+			while (!b[j].last)
+			{
+				printf("Comando %d\n", j);
+				i = 0;
+				while (b[j].argv && b[j].argv[i])
+				{
+					printf("%s\n", b[j].argv[i]);
+					i++;
+				}
+				j++;
+			}
 		}
-		if (split_input[var.i] && ft_issame(split_input[var.i][0], "|"))
+		// b[var.cmd].argv[var.j] = NULL;
+		if (split_input[var.i] && (ft_issame(split_input[var.i][0], "|")))
 		{
 			var.i++;
 			var.cmd++;
@@ -55,7 +70,14 @@ void	fill_cmds(t_command *b, char **split_input)
 
 void	create_cmd(t_command *b, char	**split_input, t_fill *var)
 {
+	// printf("entrada deb create_cmd = %s\n", b[var->cmd].argv[var->j]);
+	// printf("despues deb create_cmd = %s\n", split_input[var->i]);
 	b[var->cmd].argv[var->j++] = ft_strdup(split_input[var->i++]);
+	// printf("var %i \n", var->j);
+	// var->j = var->j + 1;
+	// var->i = var->i + 1;
+	// printf("create_cmd = %s\n", split_input[var->i - 1]);
+	b[var->cmd].argv[var->j] = NULL;
 }
 
 int	count_cmds(char **split_input)
