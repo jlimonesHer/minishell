@@ -98,7 +98,12 @@ int	exec_builtin(char **argv, char ***envp, char ***var_export)
 	else if (!ft_strncmp(argv[0], "env", 4))
 		ft_env(*envp);
 	else if (!ft_strncmp(argv[0], "exit", 5))
-		printf("exit\n");
+	{
+		ft_putstr_fd("exit\n", 1);
+		if (argv[1])
+			exit(ft_atoi(argv[1]));
+		exit(0);
+	}
 	else
 		is_build = 0;
 	return (is_build);

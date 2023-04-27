@@ -59,6 +59,13 @@ int	is_delim(t_command *cmds)
 	return (fdpipe[0]);
 }
 
+void	ft_error_127(char ***env, char ***var_export)
+{
+	ft_putstr_fd(": command no found\n", 2);
+	ft_change_va_report(env, var_export, 127);
+	exit(127);
+}
+
 /**
  * @brief 
  * 
@@ -73,24 +80,25 @@ int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 	char	*shell;
 	int		lvl;
 
+	shell = NULL;
 	lvl = ft_atoi(search_env("SHLVL", *env));
+	shell = search_path(*env, cmds->argv[0]);
 	if (exec_builtin(cmds->argv, env, var_export))
 		return (-1);
 	pid = fork();
-	if (pid == 0 && *cmds->double_out != 1)
+	if (pid == 0)
 	{
-		shell = search_path(*env, cmds->argv[0]);
-		if (shell == NULL && !access(*cmds->argv, F_OK))
+		if (!access(cmds->argv[0], F_OK))
+			shell = cmds->argv[0];
+		else if (shell == NULL && !access(*cmds->argv, F_OK))
 		{
 			shell = search_env("PWD", *env);
 			ft_export(ft_strjoin("SHLVL=", ft_itoa(++lvl)), env, var_export);
 		}
-		if (shell == NULL)
-		{
-			ft_putstr_fd(": command no found\n", 2);
-			exit(-1);
-		}
+		else if (shell == NULL)
+			ft_error_127(env, var_export);
 		execve(shell, &cmds->argv[0], *env);
+		exit(-1);
 	}
 	return (pid);
 }
