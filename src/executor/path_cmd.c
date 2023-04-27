@@ -98,6 +98,7 @@ int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 		else if (shell == NULL)
 			ft_error_127(env, var_export);
 		execve(shell, &cmds->argv[0], *env);
+		perror("Error execve");
 		exit(-1);
 	}
 	return (pid);

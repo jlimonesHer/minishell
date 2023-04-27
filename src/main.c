@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		else
-			add_history(input);
+		add_history(input);
 		a = parser(input, env);
 		if (a == NULL)
 			continue ;

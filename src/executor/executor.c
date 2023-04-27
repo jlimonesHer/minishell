@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-void	condition_fd(t_command *cmds, t_fd_pipes *t_pipe, int fds[2], int i)
+void	condition_fd(t_command *cmds, t_fd_pipes *t_pipe, int *fds, int i)
 {
 	if (cmds->delimiter)
 		t_pipe->fdin = is_delim(cmds);
@@ -36,10 +36,13 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 	int	fds[2];
 
 	i = -1;
-	if (pipe(fds) < 0)
-		return (perror("Error:"));
+	// printf("argv = %s\n", cmds[0].argv[0]);
+	// printf("argv = %s\n", cmds[1].argv[0]);
+	// printf("argv = %s\n", cmds[2].argv[0]);
 	while (++i < cmds->n_cmds)
 	{
+		if (pipe(fds) < 0)
+			return (perror("Error:"));
 		condition_fd(cmds, t_pipe, fds, i);
 		dup2(t_pipe->fdout, 1);
 		close(t_pipe->fdout);
