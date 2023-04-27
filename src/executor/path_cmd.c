@@ -77,7 +77,6 @@ int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 	if (exec_builtin(cmds->argv, env, var_export))
 		return (-1);
 	pid = fork();
-	printf("hola\n");
 	if (pid == 0 && *cmds->double_out != 1)
 	{
 		shell = search_path(*env, cmds->argv[0]);
