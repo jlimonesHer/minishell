@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char **envp)
 	env = env_copy2(envp);
 	while (si)
 	{
-		//signal(SIGINT, ft_signal);
+		signal(SIGINT, ft_signal);
 		input = readline("> ");
 		if (!input)
 			si = ctrl_c(input);
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 		executor(a, &env, &va_export);
 		env = env_copy1(env);
 		va_export = env_copy1(va_export);
-		ft_free_struct(a);
+		//ft_free_struct(a);
 		}
 	//system("leaks minishell");
 	}
@@ -65,7 +65,7 @@ void	ft_free_struct(t_command	*a)
 		if (a[i].outfile)
 			ft_freewords(-1, a[i].outfile);
 		if (a[i].delimiter)
-			ft_freewords(-1, a[i].delimiter);
+			free(a[i].delimiter);
 		if (a[i].double_out)
 			free(a[i].double_out);
 		if (a[i].double_in)
