@@ -39,15 +39,25 @@ char	*search_path(char **env, char *cmd)
 	return (NULL);
 }
 
-int	is_delim(t_command *cmds)
+int	is_delim(t_command *cmds, t_fd_pipes *t_pipe)
 {
 	int		fdpipe[2];
 	char	*line;
+	int		i;
 
 	if (pipe(fdpipe) < 0)
 		return (-1);
+	dup2(t_pipe->tmpout, 1);
+	i = 0;
+	while (cmds->delimiter[i + 1])
+	{
+		line = readline("heredoc> ");
+		if (!ft_strncmp(line, cmds->delimiter[i], ft_strlen(line) + 1))
+			i++;
+		free(line);
+	}
 	line = readline("heredoc> ");
-	while (ft_strncmp(line, *cmds->delimiter, ft_strlen(line) + 1))
+	while (ft_strncmp(line, cmds->delimiter[i], ft_strlen(line) + 1))
 	{
 		ft_putstr_fd(line, fdpipe[1]);
 		ft_putstr_fd("\n", fdpipe[1]);

@@ -72,8 +72,8 @@ void	create_delimiter(t_command *b)
 	{
 		count = 0;
 		i = -1;
-		while (b->double_in[++i])
-			count += b->double_in[i];
+		while (b[cmd].double_in[++i])
+			count += b[cmd].double_in[i];
 		if (count > 0)
 			b[cmd].delimiter = ft_calloc(count + 1, sizeof(char *));
 		else

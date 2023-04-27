@@ -114,12 +114,12 @@ void		get_va_env(char *key, char *argv, char ***env);
 char		**ft_unset(char *argv, char ***env);
 void		ft_change_va_report(char ***env, char ***va_export, int b);
 int			ft_create_child(t_command *cmds, char ***env, char ***var_export);
-int			is_delim(t_command *cmds);
+int			is_delim(t_command *cmds, t_fd_pipes *t_pipe);
 
 /*parser_fd.c*/
 int			take_fd(t_command *b);
 void		open_outfile(t_command *b, int i);
-int			open_infile(t_command *b, int i, int j);
+int			open_infile(t_command *b, int i, int *j);
 
 /*parser_quotes.c*/
 void		expand(t_command *b, char **envp);

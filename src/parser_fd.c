@@ -11,7 +11,7 @@ int	take_fd(t_command *b)
 		j = 0;
 		while (b->infile[++i])
 		{
-			if (open_infile(b, i, j) == 1)
+			if (open_infile(b, i, &j) == 1)
 				return (perror("Error"), 1);
 		}
 		i = -1;
@@ -39,7 +39,7 @@ void	open_outfile(t_command *b, int i)
 				O_WRONLY | O_CREAT | O_APPEND, 0644);
 }
 
-int	open_infile(t_command *b, int i, int j)
+int	open_infile(t_command *b, int i, int *j)
 {
 	if (b->fd_in != 0)
 		close(b->fd_in);
@@ -50,6 +50,6 @@ int	open_infile(t_command *b, int i, int j)
 			return (1);
 	}
 	else if (b->double_in[i] == 1)
-		b->delimiter[j++] = b->infile[i];
+		b->delimiter[(*j)++] = b->infile[i]; // TODO j++ se pierde en open_infile
 	return (0);
 }

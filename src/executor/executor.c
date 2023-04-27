@@ -2,8 +2,8 @@
 
 void	condition_fd(t_command *cmds, t_fd_pipes *t_pipe, int *fds, int i)
 {
-	if (cmds->delimiter)
-		t_pipe->fdin = is_delim(cmds);
+	if (cmds[i].delimiter)
+		t_pipe->fdin = is_delim(&cmds[i], t_pipe);
 	dup2(t_pipe->fdin, 0);
 	close(t_pipe->fdin);
 	if (i != cmds->n_cmds - 1)

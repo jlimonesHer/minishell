@@ -32,6 +32,19 @@ int	main(int argc, char **argv, char **envp)
 		a = parser(input, env);
 		if (a == NULL)
 			continue ;
+		int	j = 0;
+        int i;
+        while (!a[j].last)
+        {
+            printf("Comando %d\n", j);
+            i = 0;
+            while (a[j].delimiter && a[j].delimiter[i])
+            {
+                printf("%s\n", a[j].delimiter[i]);
+                i++;
+            }
+            j++;
+        }
 		free(input);
 		executor(a, &env, &va_export);
 		env = env_copy1(env);
