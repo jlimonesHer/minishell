@@ -5,7 +5,7 @@ int	ctrl_c(char *input)
 	if (!input)
 	{
 		ft_putstr_fd("exit\n", 2);
-		return (0);
+		exit(0);
 	}
 	return (1);
 }
@@ -22,8 +22,5 @@ void	ft_signal(int sig)
 	rl_redisplay();
 }
 
-
-//Hacer senal ctrl + C
 //free de mas en env
 //cd .. raiz es Desktop
-//ls >> a

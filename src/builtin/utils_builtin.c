@@ -15,6 +15,7 @@ char	**env_copy1(char **env)
 		env_cp[i] = ft_strdup(env[i]);
 		i++;
 	}
+	ft_freewords(-1, env);
 	return (env_cp);
 }
 
@@ -58,9 +59,10 @@ void	add_export(char ***envp, char *argv)
 	i = -1;
 	while ((*envp)[++i])
 			env_cp[i] = ft_strdup((*envp)[i]);
-	env_cp[i] = argv;
+	env_cp[i] = ft_strdup(argv);
 	i++;
 	i = -1;
+	ft_freewords(-1, *envp);
 	*envp = env_cp;
 }
 

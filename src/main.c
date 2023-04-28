@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, ft_signal);
 		input = readline("> ");
 		if (!input)
-			si = ctrl_c(input);
+			si = 0;
 		else
 		{
 		if (input[0] == '\0')
@@ -34,8 +34,6 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		free(input);
 		executor(a, &env, &va_export);
-		env = env_copy1(env);
-		va_export = env_copy1(va_export);
 		ft_free_struct(a);
 		}
 	}
