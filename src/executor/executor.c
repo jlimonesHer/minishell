@@ -20,13 +20,19 @@ void	condition_fd(t_command *cmds, t_fd_pipes *t_pipe, int *fds, int i)
 	}
 }
 
-/**
- * @brief loop creado para partir la funcion executor descrita debajo
- * 
- * @param cmds estructura de datos
- * @param t_pipe estructura de fds
- * @param env variables globales
- */
+void	kill_child(int n_cmds, int *children)
+{
+	int	i;
+
+	i = 0;
+	while (i < n_cmds - 1) 
+	{
+		readline("");
+		kill(children[i], SIGKILL);
+		i++;
+	}
+}
+
 static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 	char ***va_export)
 {
@@ -34,11 +40,10 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 	int	pid;
 	int	status;
 	int	fds[2];
+	int	*children;
 
 	i = -1;
-	// printf("argv = %s\n", cmds[0].argv[0]);
-	// printf("argv = %s\n", cmds[1].argv[0]);
-	// printf("argv = %s\n", cmds[2].argv[0]);
+	children = ft_calloc(sizeof(int), cmds->n_cmds);
 	while (++i < cmds->n_cmds)
 	{
 		if (pipe(fds) < 0)
@@ -47,8 +52,12 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 		dup2(t_pipe->fdout, 1);
 		close(t_pipe->fdout);
 		pid = ft_create_child(&cmds[i], env, va_export);
+		children[i] = pid;
 		if (i == cmds->n_cmds - 1)
+		{
 			waitpid(pid, &status, 0);
+			kill_child(cmds->n_cmds, children);
+		}
 		ft_change_va_report(env, va_export, WEXITSTATUS(status));
 	}
 }

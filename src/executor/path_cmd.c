@@ -64,9 +64,7 @@ int	is_delim(t_command *cmds, t_fd_pipes *t_pipe)
 		free(line);
 		line = readline("heredoc> ");
 	}
-	free(line);
-	close(fdpipe[1]);
-	return (fdpipe[0]);
+	return (close(fdpipe[1]), free(line), fdpipe[0]);
 }
 
 void	ft_error_127(char ***env, char ***var_export)
@@ -90,7 +88,6 @@ int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 	char	*shell;
 	int		lvl;
 
-	shell = NULL;
 	lvl = ft_atoi(search_env("SHLVL", *env));
 	shell = search_path(*env, cmds->argv[0]);
 	if (exec_builtin(cmds->argv, env, var_export))
@@ -113,5 +110,3 @@ int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 	}
 	return (pid);
 }
-
-

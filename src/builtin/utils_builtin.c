@@ -15,7 +15,6 @@ char	**env_copy1(char **env)
 		env_cp[i] = ft_strdup(env[i]);
 		i++;
 	}
-	ft_freewords(-1, env);
 	return (env_cp);
 }
 
