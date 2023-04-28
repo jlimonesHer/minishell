@@ -52,17 +52,26 @@ int	is_delim(t_command *cmds, t_fd_pipes *t_pipe)
 	while (cmds->delimiter[i + 1])
 	{
 		line = readline("heredoc> ");
+		if (!line)
+		{
+			i++;
+			continue ;
+		}
 		if (!ft_strncmp(line, cmds->delimiter[i], ft_strlen(line) + 1))
 			i++;
 		free(line);
 	}
 	line = readline("heredoc> ");
+	if (!line)
+		return (close(fdpipe[1]), fdpipe[0]);
 	while (ft_strncmp(line, cmds->delimiter[i], ft_strlen(line) + 1))
 	{
 		ft_putstr_fd(line, fdpipe[1]);
 		ft_putstr_fd("\n", fdpipe[1]);
 		free(line);
 		line = readline("heredoc> ");
+		if (!line)
+			break ;
 	}
 	return (close(fdpipe[1]), free(line), fdpipe[0]);
 }
