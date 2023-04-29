@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/29 14:26:53 by abarriga          #+#    #+#             */
+/*   Updated: 2023/04/29 14:26:54 by abarriga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "../libft/libft.h"
@@ -62,8 +74,8 @@ typedef struct s_expand {
 }				t_expand;
 
 /* utils.c */
-void		ft_exit(t_command *cmds);
-void		ft_free_struct(t_command	*a);
+void		ft_ispipe(char	**split_input, int *i, int *cmd);
+void		ft_free_struct(t_command *a, char *input);
 void		free_quotes(t_expand *e);
 void		free_first_quotes(t_expand *e);
 void		free_env(char **env);
@@ -92,11 +104,12 @@ void		last_cmd_table(t_command *b, int n_cmds);
 void		fill_cmds(t_command *b, char **split_input);
 void		create_cmd(t_command *b, char	**split_input, t_fill *var);
 
-/*parser_quotes.c*/
+/*parser_redir.c*/
 void		count_redir(char	**split_input, t_fill *var, t_command *b);
 void		create_infile(t_command *b, char **split_input, t_fill *var);
 void		create_outfile(t_command *b, char **split_input, t_fill *var);
 void		create_delimiter(t_command *b);
+void		init_struct(t_command *b, t_fill *var, int cmd, int j);
 
 /*path_cmd.c*/
 char		*search_path(char **envp, char *cmd, int i);

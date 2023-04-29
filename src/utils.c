@@ -11,15 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-/**
- * @brief la funcion sale si el parametro pasado es exit
- * 
- * @param cmd string del comando pasado desde shell
- */
-void	ft_exit(t_command *cmds)
-{
-	ft_free_struct(cmds);
-}
 
 void	free_quotes(t_expand *e)
 {
@@ -54,4 +45,13 @@ void	ft_change_va_report(char ***env, char ***va_export, int b)
 	free((*va_export)[0]);
 	(*va_export)[0] = ft_strdup(b2);
 	free(b2);
+}
+
+void	ft_ispipe(char	**split_input, int *i, int *cmd)
+{
+	if (split_input[*i] && (ft_issame(split_input[*i][0], "|")))
+	{
+		*i += 1;
+		*cmd += 1;
+	}
 }
