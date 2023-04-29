@@ -6,7 +6,7 @@
 /*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:20:30 by abarriga          #+#    #+#             */
-/*   Updated: 2023/04/29 14:20:31 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/04/29 16:03:23 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	check_redir(char **strs)
 {
 	if (!strs[0])
 		return (0);
-	if (ft_issame(strs[0][0], ">|"))
+	if (ft_issame(strs[0][0], "|"))
 		return (1);
 	strs++;
 	while (*strs)

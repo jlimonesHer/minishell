@@ -6,7 +6,7 @@
 /*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:20:08 by abarriga          #+#    #+#             */
-/*   Updated: 2023/04/29 14:20:09 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/04/29 16:04:16 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ char	**lexer(char *input)
 	char	**split_input;
 
 	if (check_input_quotes(input))
+		return (NULL);
+	if (ft_issame(input[0], "><") && ft_strlen(input) == 1)
 		return (NULL);
 	split_input = split_shell(input);
 	return (split_input);
