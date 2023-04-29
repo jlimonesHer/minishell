@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/29 13:20:35 by jlimones          #+#    #+#             */
+/*   Updated: 2023/04/29 13:20:36 by jlimones         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 int	ctrl_d(char *input)
@@ -20,5 +32,3 @@ void	ft_signal(int sig)
 	rl_on_new_line();
 	rl_redisplay();
 }
-
-//cd .. raiz es Desktop

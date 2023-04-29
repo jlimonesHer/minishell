@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   executor.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/29 13:19:50 by jlimones          #+#    #+#             */
+/*   Updated: 2023/04/29 13:22:56 by jlimones         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	condition_fd(t_command *cmds, t_fd_pipes *t_pipe, int *fds, int i)
@@ -25,7 +37,7 @@ void	kill_child(int n_cmds, int *children)
 	int	i;
 
 	i = 0;
-	while (i < n_cmds - 1) 
+	while (i < n_cmds -1)
 	{
 		readline("");
 		kill(children[i], SIGKILL);
@@ -63,13 +75,6 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 	}
 }
 
-/**
- * @brief funcion para crear los procesos necesarios para ejecutar los comandos
- * introducidos
- * 
- * @param cmds estructura de datos
- * @param env variables globales
- */
 void	executor(t_command *cmds, char ***env, char ***var_export)
 {
 	t_fd_pipes	*t_pipe;
