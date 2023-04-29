@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_fd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/29 14:20:15 by abarriga          #+#    #+#             */
+/*   Updated: 2023/04/29 14:20:16 by abarriga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int	take_fd(t_command *b)
@@ -26,7 +38,6 @@ int	take_fd(t_command *b)
 	return (0);
 }
 
-
 void	open_outfile(t_command *b, int i)
 {
 	if (b->fd_out != 0)
@@ -50,6 +61,6 @@ int	open_infile(t_command *b, int i, int *j)
 			return (1);
 	}
 	else if (b->double_in[i] == 1)
-		b->delimiter[(*j)++] = b->infile[i]; // TODO j++ se pierde en open_infile
+		b->delimiter[(*j)++] = b->infile[i];
 	return (0);
 }
