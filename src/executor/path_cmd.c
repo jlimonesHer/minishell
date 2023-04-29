@@ -16,17 +16,17 @@ char	*search_path(char **env, char *cmd, int i)
 	char	*path_cmd;
 	char	*substr;
 	char	*substr_f;
-	char	*cmd2;
+	//char	*cmd2;
 
-	cmd2 = *ft_split(cmd, ' ');
+//	cmd2 = ft_split(cmd, ' ');
 	while (*env && !ft_strnstr(*env, "PATH=", 5))
 		env++;
 	substr_f = ft_substr(*env, 5, ft_strlen(*env) - 5);
 	paths = ft_split(substr_f, ':');
 	free(substr_f);
-	substr = ft_strjoin("/", cmd2);
-	free(cmd2);
-	free(cmd);
+
+	substr = ft_strjoin("/", cmd);
+	//free(cmd2);
 	while (paths[i])
 	{
 		path_cmd = ft_strjoin(paths[i++], substr);
@@ -98,14 +98,20 @@ int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 	//int		lvl;
 
 	//lvl = ft_atoi(search_env("SHLVL", *env));
+	printf("argv %s\n", cmds->argv[0]);
 	shell = search_path(*env, cmds->argv[0], 0);
+	printf("argv %s\n", cmds->argv[0]);
+	//shell = search_path(*env, cmds->argv[0], 0);
 	if (exec_builtin(cmds->argv, env, var_export))
 		return (-1);
 	pid = fork();
 	if (pid == 0)
 	{
 		if (!access(cmds->argv[0], F_OK))
-			shell = cmds->argv[0];
+			{
+				free(shell);
+				shell = ft_strdup(cmds->argv[0]);
+			}
 		// else if (shell == NULL && !access(*cmds->argv, F_OK))
 		// {
 		// 	shell = search_env("PWD", *env);
@@ -113,9 +119,11 @@ int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 		// }
 		else if (shell == NULL)
 			ft_error_127(env, var_export);
+		//free(shell);
 		execve(shell, &cmds->argv[0], *env);
 		perror("Error execve");
 		exit(-1);
 	}
+	free(shell);
 	return (pid);
 }

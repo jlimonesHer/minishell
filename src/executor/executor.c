@@ -57,6 +57,7 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 		{
 			waitpid(pid, &status, 0);
 			kill_child(cmds->n_cmds, children);
+			free(children);
 		}
 		ft_change_va_report(env, va_export, WEXITSTATUS(status));
 	}

@@ -46,19 +46,27 @@ void	ft_free_struct(t_command	*a)
 	int	i;
 
 	i = 0;
+
 	while (a[i].last != 1)
 	{
+		printf("aqui0\n");
 		ft_freewords(-1, a[i].argv);
+		printf("aqui2\n");
 		if (a[i].infile)
 			ft_freewords(-1, a[i].infile);
+		printf("aqui3\n");
 		if (a[i].outfile)
 			ft_freewords(-1, a[i].outfile);
+		printf("aqui4\n");
 		if (a[i].delimiter)
 			free(a[i].delimiter);
+		printf("aqui5\n");
 		if (a[i].double_out)
 			free(a[i].double_out);
+		printf("aqui6\n");
 		if (a[i].double_in)
 			free(a[i].double_in);
+		printf("aqui7\n");
 		i++;
 	}
 	free(a);
