@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:19:50 by jlimones          #+#    #+#             */
-/*   Updated: 2023/04/29 13:22:56 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/04/29 15:42:51 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	loop_cmds(t_command *cmds, t_fd_pipes *t_pipe, char ***env,
 	while (++i < cmds->n_cmds)
 	{
 		if (pipe(fds) < 0)
-			return (perror("Error:"));
+			return (perror("Error: pipe: "));
 		condition_fd(cmds, t_pipe, fds, i);
 		dup2(t_pipe->fdout, 1);
 		close(t_pipe->fdout);

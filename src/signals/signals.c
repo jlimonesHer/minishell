@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:20:35 by jlimones          #+#    #+#             */
-/*   Updated: 2023/04/29 14:28:54 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/04/29 16:46:49 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ctrl_d(char *input)
 	if (!input)
 	{
 		ft_putstr_fd("exit\n", 2);
-		exit(0);
+		exit (0);
 	}
 	return (1);
 }
