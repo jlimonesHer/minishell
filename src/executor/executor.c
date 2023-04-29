@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:19:50 by jlimones          #+#    #+#             */
-/*   Updated: 2023/04/29 15:42:51 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/04/29 16:55:23 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,21 @@ void	executor(t_command *cmds, char ***env, char ***var_export)
 	close(t_pipe->tmpin);
 	close(t_pipe->tmpout);
 	free(t_pipe);
+}
+
+int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
+{
+	int		pid;
+	char	*shell;
+
+	shell = search_path(*env, cmds->argv[0], 0);
+	if (exec_builtin(cmds->argv, env, var_export))
+		return (-1);
+	pid = fork();
+	if (pid == 0)
+	{
+		ft_child_routine(cmds, shell, env, var_export);
+	}
+	free(shell);
+	return (pid);
 }

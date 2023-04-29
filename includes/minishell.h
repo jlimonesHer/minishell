@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:26:53 by abarriga          #+#    #+#             */
-/*   Updated: 2023/04/29 14:26:54 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/04/29 16:56:55 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void		init_struct(t_command *b, t_fill *var, int cmd, int j);
 /*path_cmd.c*/
 char		*search_path(char **envp, char *cmd, int i);
 void		executor(t_command *cmds, char ***env, char ***var_export);
+void		ft_child_routine(t_command *cmds, char *shell,
+				char ***env, char ***var_export);
 
 /*builtin.c*/
 void		ft_pwd(void);

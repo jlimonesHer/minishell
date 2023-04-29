@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:20:20 by jlimones          #+#    #+#             */
-/*   Updated: 2023/04/29 16:46:06 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/04/29 16:55:16 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,24 +120,4 @@ void	ft_child_routine(t_command *cmds, char *shell,
 	execve(shell, &cmds->argv[0], *env);
 	perror("Error execve");
 	exit(-1);
-}
-
-int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
-{
-	int		pid;
-	char	*shell;
-	//int		lvl;
-	//char 	*num;
-
-
-	shell = search_path(*env, cmds->argv[0], 0);
-	if (exec_builtin(cmds->argv, env, var_export))
-		return (-1);
-	pid = fork();
-	if (pid == 0)
-	{
-		ft_child_routine(cmds, shell, env, var_export);
-	}
-	free(shell);
-	return (pid);
 }
