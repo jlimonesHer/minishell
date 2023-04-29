@@ -1,7 +1,7 @@
 NAME = minishell
 LIBFT = libft/libft.a
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra
 SRC = 	src/main.c \
 	 	src/utils.c \
 		src/lexer.c \
@@ -18,8 +18,8 @@ SRC = 	src/main.c \
 		src/parser_fd.c \
 		src/signals/signals.c
 
-LDFLAGS="-L/System/Volumes/Data/sgoinfre/goinfre/Perso/jlimones/homebrew/opt/readline/lib"
-CPPFLAGS="-I/System/Volumes/Data/sgoinfre/goinfre/Perso/jlimones/homebrew/opt/readline/include"
+LDFLAGS="-L/System/Volumes/Data/sgoinfre/goinfre/Perso/abarriga/homebrew/opt/readline/lib"
+CPPFLAGS="-I/System/Volumes/Data/sgoinfre/goinfre/Perso/abarriga/homebrew/opt/readline/include"
 LIB= -lreadline
 
 AUTHOR = jlimones / abarriga

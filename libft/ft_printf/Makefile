@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+         #
+#    By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 10:20:34 by jlimones          #+#    #+#              #
-#    Updated: 2022/12/02 14:28:58 by jlimones         ###   ########.fr        #
+#    Updated: 2023/04/29 17:56:48 by abarriga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC = ft_printf.c \
 	  ft_putnbr_unsigned.c \
 	  ft_p_nbr_hex.c \
 
-
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a

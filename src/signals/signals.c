@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:20:35 by jlimones          #+#    #+#             */
-/*   Updated: 2023/04/29 16:46:49 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:12:57 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_signal(int sig)
 	rl_redisplay();
 	ft_putstr_fd("  ", 1);
 	ft_printf("\n");
+	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }
