@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, ft_signal);
 		input = readline("> ");
 		if (!input)
-			si = 0;
+			si = ctrl_d(input);
 		else
 		{
 		if (input[0] == '\0')
@@ -36,8 +36,8 @@ int	main(int argc, char **argv, char **envp)
 		executor(a, &env, &va_export);
 		ft_free_struct(a);
 		}
-	}
 	system("leaks minishell");
+	}
 	return (0);
 }
 

@@ -1,11 +1,11 @@
 #include "../../includes/minishell.h"
 
-int	ctrl_c(char *input)
+int	ctrl_d(char *input)
 {
 	if (!input)
 	{
 		ft_putstr_fd("exit\n", 2);
-		exit(0);
+		return (0);
 	}
 	return (1);
 }

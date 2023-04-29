@@ -99,7 +99,7 @@ void		create_outfile(t_command *b, char **split_input, t_fill *var);
 void		create_delimiter(t_command *b);
 
 /*path_cmd.c*/
-char		*search_path(char **envp, char *cmd);
+char		*search_path(char **envp, char *cmd, int i);
 void		executor(t_command *cmds, char ***env, char ***var_export);
 
 /*builtin.c*/
@@ -130,5 +130,5 @@ char		*expand_quotes(char *cmd, char **envp);
 
 /*signals.c*/
 void		ft_signal(int sig);
-int			ctrl_c(char *input);
+int			ctrl_d(char *input);
 #endif 

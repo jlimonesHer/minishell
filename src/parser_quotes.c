@@ -85,6 +85,7 @@ char	*search_env(char *var, char **envp)
 			return (ft_strdup(""));
 		i++;
 	}
+	free(str);
 	len_str = ft_strlen(envp[i]);
 	var = ft_substr(envp[i], len, (len_str - len));
 	return (var);
