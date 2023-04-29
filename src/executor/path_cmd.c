@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:20:20 by jlimones          #+#    #+#             */
-/*   Updated: 2023/04/29 13:59:01 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/04/29 14:33:23 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,9 @@ int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 {
 	int		pid;
 	char	*shell;
+	int		lvl;
 
+	lvl = ft_atoi(search_env("SHLVL", *env));
 	shell = search_path(*env, cmds->argv[0], 0);
 	if (exec_builtin(cmds->argv, env, var_export))
 		return (-1);
@@ -119,6 +121,7 @@ int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 		if (!access(cmds->argv[0], F_OK))
 		{
 			free(shell);
+			ft_export(ft_strjoin("SHLVL=", ft_itoa(++lvl)), env, var_export);
 			shell = ft_strdup(cmds->argv[0]);
 		}
 		else if (shell == NULL)
