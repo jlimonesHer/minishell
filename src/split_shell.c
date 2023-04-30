@@ -43,7 +43,8 @@ int	count_words(char *s)
 	while (*s)
 	{
 		s += check_word(s);
-		s += ft_issame(*s, " ");
+		while (*s && *s == ' ')
+			s++;
 		c_words++;
 	}
 	return (c_words);
@@ -56,13 +57,15 @@ int	fill_cmd(char *input, int num_words, char **strs)
 	int	j;
 
 	i = 0;
+	printf("numords= %d\n", num_words);
 	while (num_words > i)
 	{
-		input += ft_issame(*input, " ");
+		while(ft_issame(*input, " "))
+			input++;
 		word_len = check_word(input);
 		strs[i] = ft_calloc(word_len + 1, sizeof(char));
 		if (!strs[i])
-			return (ft_freewords(i, strs), 0);
+			return (ft_freewords(i, strs), 1);
 		j = 0;
 		while (word_len > j)
 		{
