@@ -6,7 +6,7 @@
 /*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:20:26 by abarriga          #+#    #+#             */
-/*   Updated: 2023/04/29 14:20:27 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/05/01 19:25:08 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_command	*parser(char *input, char **envp)
 
 	split_input = lexer(input);
 	if (split_input == NULL)
-		return (ft_putstr_fd("Error: invalid quotes\n", 2), NULL);
+		return (ft_putstr_fd("Error: invalid quotes\n", 2), free(input), NULL);
 	n_cmds = count_cmds(split_input);
 	b = ft_calloc(sizeof(t_command), (n_cmds + 1));
 	if (!b)
