@@ -44,7 +44,7 @@ void	main2(int si, char **va_export, char **env)
 			si = ctrl_d(input);
 		else
 		{
-			if (input[0] == '\0')
+			if (input[0] == '\0' || count_words(input) == 0)
 			{
 				free(input);
 				continue ;
