@@ -6,7 +6,7 @@
 /*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:20:19 by abarriga          #+#    #+#             */
-/*   Updated: 2023/04/29 14:20:20 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:29:54 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	expand(t_command *b, char **envp)
 {
 	t_expand	e;
+	char		*temp;
 
 	while (b->last != 1)
 	{
@@ -22,11 +23,19 @@ void	expand(t_command *b, char **envp)
 		while (b->argv && b->argv[++e.i])
 		{
 			if (ft_issame(b->argv[e.i][0], "\""))
+			{
+				temp = b->argv[e.i];
 				b->argv[e.i] = expand_quotes(&b->argv[e.i][1], envp);
+				free(temp);
+			}
 			else if (ft_issame(b->argv[e.i][0], "\'"))
-				b->argv[e.i] = remove_quote(&b->argv[e.i][1]);
-			else
+				b->argv[e.i] = remove_quote(b->argv[e.i]);
+			else if (ft_issame(b->argv[e.i][0], "$"))
+			{
+				temp = b->argv[e.i];
 				b->argv[e.i] = expand_text(b->argv[e.i], envp);
+				free(temp);
+			}
 		}
 		b++;
 	}
@@ -35,20 +44,24 @@ void	expand(t_command *b, char **envp)
 char	*remove_quote(char *cmd)
 {
 	int	len;
+	int	i;
 
+	i = 1;
 	len = ft_strlen(cmd);
 	cmd[len - 1] = '\0';
+	while (i <= len - 1)
+	{
+		cmd[i - 1] = cmd[i];
+		i++;
+	}
 	return (cmd);
 }
 
 char	*expand_text(char *cmd, char **envp)
 {
-	if (cmd[0] == '$')
-	{
-		cmd = search_env(&cmd[1], envp);
-		if (cmd == NULL)
-			return (NULL);
-	}
+	cmd = search_env(&cmd[1], envp);
+	if (cmd == NULL)
+		return (NULL);
 	return (cmd);
 }
 
@@ -94,7 +107,7 @@ char	*search_env(char *var, char **envp)
 	while (ft_strnstr(envp[i], str, len) == 0)
 	{
 		if (!envp[i + 1])
-			return (ft_strdup(""));
+			return (free(str), ft_strdup(""));
 		i++;
 	}
 	free(str);

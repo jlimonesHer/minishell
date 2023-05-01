@@ -6,7 +6,7 @@
 /*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:20:30 by abarriga          #+#    #+#             */
-/*   Updated: 2023/04/29 16:03:23 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/05/01 12:52:21 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,9 @@ int	fill_cmd(char *input, int num_words, char **strs)
 	int	j;
 
 	i = 0;
-	printf("numords= %d\n", num_words);
 	while (num_words > i)
 	{
-		while(ft_issame(*input, " "))
+		while (ft_issame(*input, " "))
 			input++;
 		word_len = check_word(input);
 		strs[i] = ft_calloc(word_len + 1, sizeof(char));

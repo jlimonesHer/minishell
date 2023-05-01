@@ -6,7 +6,7 @@
 /*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:20:00 by abarriga          #+#    #+#             */
-/*   Updated: 2023/04/29 14:20:01 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/05/01 13:02:18 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int argc, char **argv, char **envp)
 	va_export = env_copy2(envp);
 	env = env_copy2(envp);
 	main2(si, va_export, env);
-	system("leaks minishell");
 	return (0);
 }
 
@@ -56,6 +55,7 @@ void	main2(int si, char **va_export, char **env)
 				continue ;
 			executor(a, &env, &va_export);
 			ft_free_struct(a, input);
+			system("leaks minishell");
 		}
 	}
 }
