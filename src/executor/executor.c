@@ -6,7 +6,7 @@
 /*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:19:50 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/01 14:45:52 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/05/03 10:52:22 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 	char	*shell;
 
 	shell = search_path(*env, cmds->argv[0], 0);
-	printf("shell = %p\n", shell);
 	if (exec_builtin(cmds->argv, env, var_export))
 		return (free(shell), -1);
 	pid = fork();

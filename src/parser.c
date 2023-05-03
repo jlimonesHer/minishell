@@ -6,7 +6,7 @@
 /*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:20:26 by abarriga          #+#    #+#             */
-/*   Updated: 2023/05/01 19:25:08 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/05/03 11:47:57 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_command	*parser(char *input, char **envp)
 	fill_cmds(b, split_input);
 	create_delimiter(b);
 	if (take_fd(b))
-		return (NULL);
+		return (ft_freewords(-1, split_input), ft_free_struct(b, input), NULL);
 	expand(b, envp);
 	ft_freewords(-1, split_input);
 	return (b);
