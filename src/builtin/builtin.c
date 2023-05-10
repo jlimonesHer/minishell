@@ -6,20 +6,11 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:19:56 by jlimones          #+#    #+#             */
-/*   Updated: 2023/04/29 13:20:00 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/10 10:11:34 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	ft_pwd(void)
-{
-	char	*buffer;
-
-	buffer = getcwd(NULL, 0);
-	ft_putendl_fd(buffer, 1);
-	free(buffer);
-}
 
 void	ft_echo(char **argv)
 {
@@ -65,10 +56,17 @@ static void	path_pwd_old(char *path, char ***env)
 	(*env)[i] = ft_strjoin("PWD=", path);
 }
 
+void	ft_free_paths(char *path, char *path2)
+{
+	free(path2);
+	free(path);
+}
+
 static	void	ft_cd(char **argv, char ***env, char ***va_export)
 {
 	char	buffer[256];
 	char	*path;
+	char	*path2;
 
 	getcwd(buffer, 256);
 	if (!argv[1])
@@ -81,8 +79,8 @@ static	void	ft_cd(char **argv, char ***env, char ***va_export)
 		chdir(search_env("OLDPWD", *env));
 		return ;
 	}
-	path = ft_strjoin(buffer, "/");
-	path = ft_strjoin(path, argv[1]);
+	path2 = ft_strjoin(buffer, "/");
+	path = ft_strjoin(path2, argv[1]);
 	if (chdir(argv[1]) < 0)
 	{
 		ft_putstr_fd(("cd: no such file or directory: "), 2);
@@ -90,6 +88,7 @@ static	void	ft_cd(char **argv, char ***env, char ***va_export)
 	}
 	path_pwd_old(path, env);
 	path_pwd_old(path, va_export);
+	ft_free_paths(path, path2);
 }
 
 int	exec_builtin(char **argv, char ***envp, char ***var_export)

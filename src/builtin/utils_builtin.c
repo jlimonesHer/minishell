@@ -6,11 +6,21 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:19:27 by jlimones          #+#    #+#             */
-/*   Updated: 2023/04/29 13:19:34 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/10 10:33:08 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+
+void	ft_pwd(void)
+{
+	char	*buffer;
+
+	buffer = getcwd(NULL, 0);
+	ft_putendl_fd(buffer, 1);
+	free(buffer);
+}
 
 char	**env_copy1(char **env)
 {
@@ -101,4 +111,5 @@ void	ft_export(char *argv, char ***envp, char ***var_export)
 	}
 	else
 		add_export(var_export, argv);
+	free(argv_cp);
 }

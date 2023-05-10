@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:22:01 by jlimones          #+#    #+#             */
-/*   Updated: 2023/04/29 13:22:02 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/10 10:38:39 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	**ft_unset(char *argv, char ***env)
 		if (ft_strncmp(argv, (*env)[i], ft_strlen(argv)))
 		{
 			env_cp[j] = ft_strdup((*env)[i]);
+			free((*env)[j]);
 			j++;
 		}
 		i++;
