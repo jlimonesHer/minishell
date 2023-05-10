@@ -6,7 +6,7 @@
 /*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:20:08 by abarriga          #+#    #+#             */
-/*   Updated: 2023/04/29 16:04:16 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:16:42 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ int	check_input_quotes(char *input)
 		if (*input == quote)
 			quote = '\0';
 		else if (ft_issame(*input, "\"\'") && quote == '\0')
+		{
 			quote = *input;
+			if (input[1] == quote)
+				return (1);
+		}
 		input++;
 	}
 	if (quote != '\0')
