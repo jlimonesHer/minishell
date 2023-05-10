@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:19:56 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/10 10:11:34 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:58:04 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ static	void	ft_cd(char **argv, char ***env, char ***va_export)
 	path2 = ft_strjoin(buffer, "/");
 	path = ft_strjoin(path2, argv[1]);
 	if (chdir(argv[1]) < 0)
-	{
-		ft_putstr_fd(("cd: no such file or directory: "), 2);
-		ft_putstr_fd(ft_strjoin(argv[1], "\n"), 2);
+		ft_putstr_fd(("cd: no such file or directory: \n"), 2);
+	else
+	{	
+		path_pwd_old(path, env);
+		path_pwd_old(path, va_export);
 	}
-	path_pwd_old(path, env);
-	path_pwd_old(path, va_export);
 	ft_free_paths(path, path2);
 }
 

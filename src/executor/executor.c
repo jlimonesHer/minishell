@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:19:50 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/03 10:52:22 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:06:59 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ void	condition_fd(t_command *cmds, t_fd_pipes *t_pipe, int *fds, int i)
 
 void	kill_child(int n_cmds, int *children)
 {
-	int	i;
+	int		i;
+	char	*line;
 
 	i = 0;
 	while (i < n_cmds -1)
 	{
-		readline("");
+		line = readline("");
+		free(line);
 		kill(children[i], SIGKILL);
 		i++;
 	}
@@ -104,9 +106,7 @@ int	ft_create_child(t_command *cmds, char ***env, char ***var_export)
 		return (free(shell), -1);
 	pid = fork();
 	if (pid == 0)
-	{
 		ft_child_routine(cmds, shell, env, var_export);
-	}
 	free(shell);
 	return (pid);
 }

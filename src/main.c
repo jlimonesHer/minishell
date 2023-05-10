@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:20:00 by abarriga          #+#    #+#             */
-/*   Updated: 2023/05/10 12:02:19 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:01:02 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	main2(int si, char **va_export, char **env)
 				continue ;
 			executor(a, &env, &va_export);
 			ft_free_struct(a, input);
-			system("leaks minishell");
+	system("leaks minishell");
 		}
 	}
 }
