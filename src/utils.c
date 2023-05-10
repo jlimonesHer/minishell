@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:19:13 by jlimones          #+#    #+#             */
-/*   Updated: 2023/04/29 13:19:17 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/10 11:59:40 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,10 @@ void	ft_ispipe(char	**split_input, int *i, int *cmd)
 		*i += 1;
 		*cmd += 1;
 	}
+}
+
+void	init_e(t_expand *e)
+{
+	e->j = -1;
+	e->join = NULL;
 }

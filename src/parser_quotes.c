@@ -6,7 +6,7 @@
 /*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:20:19 by abarriga          #+#    #+#             */
-/*   Updated: 2023/05/10 10:20:54 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:00:33 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ char	*expand_quotes(char *cmd, char **envp)
 {
 	t_expand	e;
 
-	e.j = -1;
-	e.join = NULL;
+	init_e(&e);
 	while (cmd[++(e.j)])
 	{
 		if (cmd[e.j] == '$' && !ft_issame(cmd[e.j + 1], " \"><|\t\v\n\0"))
@@ -83,6 +82,7 @@ char	*expand_quotes(char *cmd, char **envp)
 			e.env = search_env(e.var, envp);
 			e.sub = ft_substr(cmd, 0, e.bg);
 			e.line = ft_strjoin(e.sub, e.env);
+			free(e.join);
 			e.join = ft_strjoin(e.line, &cmd[e.j]);
 			e.j = (ft_strlen(e.env) - ft_strlen(e.var) + 1);
 			cmd = e.join;

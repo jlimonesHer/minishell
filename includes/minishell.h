@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:26:53 by abarriga          #+#    #+#             */
-/*   Updated: 2023/04/29 16:56:55 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/10 11:59:34 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void		ft_free_struct(t_command *a, char *input);
 void		free_quotes(t_expand *e);
 void		free_first_quotes(t_expand *e);
 void		free_env(char **env);
+void		init_e(t_expand *e);
 
 /*lexer.c*/
 int			check_input_quotes(char *input);
