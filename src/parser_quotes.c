@@ -6,7 +6,7 @@
 /*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:20:19 by abarriga          #+#    #+#             */
-/*   Updated: 2023/05/01 14:29:54 by abarriga         ###   ########.fr       */
+/*   Updated: 2023/05/10 10:20:54 by abarriga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	expand(t_command *b, char **envp)
 			}
 			else if (ft_issame(b->argv[e.i][0], "\'"))
 				b->argv[e.i] = remove_quote(b->argv[e.i]);
-			else if (ft_issame(b->argv[e.i][0], "$"))
+			else if (ft_issame(b->argv[e.i][0], "$") && b->argv[e.i][1])
 			{
 				temp = b->argv[e.i];
 				b->argv[e.i] = expand_text(b->argv[e.i], envp);
@@ -73,7 +73,7 @@ char	*expand_quotes(char *cmd, char **envp)
 	e.join = NULL;
 	while (cmd[++(e.j)])
 	{
-		if (cmd[e.j] == '$')
+		if (cmd[e.j] == '$' && !ft_issame(cmd[e.j + 1], " \"><|\t\v\n\0"))
 		{
 			e.bg = e.j;
 			while (!ft_issame(cmd[e.j], " \"><|\t\v\n\0"))
