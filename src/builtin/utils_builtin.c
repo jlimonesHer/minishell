@@ -6,12 +6,11 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:19:27 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/10 10:33:08 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:01:44 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 void	ft_pwd(void)
 {
@@ -41,12 +40,6 @@ char	**env_copy1(char **env)
 	return (env_cp);
 }
 
-/**
- * @brief 
- * 
- * @param env 
- * @return char** 
- */
 char	**env_copy2(char **env)
 {
 	char	**env_cp;
